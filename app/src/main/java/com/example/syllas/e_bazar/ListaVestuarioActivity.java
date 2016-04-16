@@ -3,6 +3,8 @@ package com.example.syllas.e_bazar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaVestuarioActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ItemVestuarioAdapter.OnDataSelected {
+
+    private List<ItemVestuario> itensVest = new ArrayList<ItemVestuario>();
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +34,8 @@ public class ListaVestuarioActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
+        
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -31,6 +44,30 @@ public class ListaVestuarioActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view); //pega o id do layout para alocar os cardview dinamicamente
+        recyclerView.setHasFixedSize(true); //Seta os elementos de tamanho fixo, ajudar a ganhar desempenho
+
+        linearLayoutManager = new LinearLayoutManager(this); //Define como os dados são apresentados no recycler view
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); //define como uma lista vertical
+
+        recyclerView.setLayoutManager(linearLayoutManager); //configurando o recycler view com a especificação de layout
+
+        adapter = new ItemVestuarioAdapter(this,this,itensVest);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void criarVestFake() {
+        for(int i = 0; i<10;i++){
+            ItemVestuario sampleVest = new ItemVestuario();
+            sampleVest.setTamanho("tam:"+i);
+            sampleVest.setPreco(i + 0.5);
+            sampleVest.setOng("Ong" + i);
+            sampleVest.setIdTipo(i);
+            sampleVest.setCor("cor" + i);
+            sampleVest.setEstadoConservacao(i);
+            itensVest.add(sampleVest);
+        }
     }
 
     @Override
@@ -55,7 +92,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        int id = item.getItemId(); //item do menu
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -82,5 +119,13 @@ public class ListaVestuarioActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onDataSelected(View view, int position) {
+        ItemVestuario selectedItem  = itensVest.get(position);
+        Toast.makeText(this, "Selected Item: " + selectedItem.toString(), Toast.LENGTH_SHORT).show();
+        itensVest.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 }
