@@ -5,54 +5,97 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:contentPadding="12dp"
     android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tipo"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="contact det"
-            android:gravity="center_vertical"
-            android:textColor="@android:color/white"
-            android:textSize="14dp"/>
-
-        <TextView
-            android:id="@+id/tamanho"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_below="@id/tipo"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"/>
+            android:id="@+id/imagem"
+            android:src="@drawable/negocios"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-        <TextView
-            android:id="@+id/cor"
+        <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Surname"
-            android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_below="@id/tamanho"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imagem"
+            android:layout_toEndOf="@+id/imagem">
 
-        <TextView
-            android:id="@+id/ong"
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Calça"
+                    android:id="@+id/tipo"
+                    android:layout_column="0" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Tamanho"
+                    android:id="@+id/tamanho"
+                    android:layout_column="0" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Cor"
+                    android:id="@+id/cor"
+                    android:layout_column="0" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="150dp"
-            android:layout_alignBaseline="@id/tamanho"/>
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Ong"
+                android:id="@+id/ong"
+                android:layout_column="0" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Preço"
+                    android:id="@+id/preco"
+                    android:layout_column="1" />
+            </TableRow>
+        </TableLayout>
 
     </RelativeLayout>
  </android.support.v7.widget.CardView>
