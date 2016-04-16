@@ -16,4 +16,6 @@
         <item>Meia</item>
         <item>Calçado</item>
     </string-array>
+    <string name="title_activity_lista_ong">ListaOngActivity</string>
+    <string name="listVest">Listar Vestuário</string>
 </resources>

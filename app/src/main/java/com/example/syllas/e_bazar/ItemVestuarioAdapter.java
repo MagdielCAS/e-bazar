@@ -32,7 +32,7 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View view = LayoutInflater.
                 from(parent.getContext()).
-                inflate(R.layout.cardview_layout, parent, false);
+                inflate(R.layout.cardview_vest_layout, parent, false);
 
         return new ViewHolder(view);
     }
