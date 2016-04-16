@@ -8,4 +8,12 @@
     <string name="novoVest">Novo Vestuário</string>
     <string name="listOng">Listar ONGs</string>
     <string name="novaOng">Nova ONG</string>
+    <string-array name="tipoVest">
+        <item>Calça</item>
+        <item>Blusa</item>
+        <item>Vestido</item>
+        <item>Saia</item>
+        <item>Meia</item>
+        <item>Calçado</item>
+    </string-array>
 </resources>

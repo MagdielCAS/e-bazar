@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,10 +40,12 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemVestuario item = itensVest.get(position);
-        holder.vTipo.setText("Tipo: "+item.getIdTipo());
+        holder.vImg.setImageResource(item.getImg());
+        holder.vTipo.setText(item.getTipo());
         holder.vTamanho.setText("Tamanho: "+item.getTamanho());
         holder.vCor.setText("Cor: "+item.getCor());
         holder.vOng.setText("Ong: "+item.getOng());
+        holder.vPreco.setText("Preco: "+item.getOng());
     }
 
     @Override
@@ -59,6 +62,8 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
         public TextView vCor;
         public TextView vTipo;
         public TextView vOng;
+        public TextView vPreco;
+        public ImageView vImg;
 
         public ViewHolder(View view) {
             super(view);
@@ -67,6 +72,8 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
             vCor = (TextView) view.findViewById(R.id.cor);
             vOng = (TextView) view.findViewById(R.id.ong);
             vTipo = (TextView) view.findViewById(R.id.tipo);
+            vPreco = (TextView) view.findViewById(R.id.preco);
+            vImg = (ImageView) view.findViewById(R.id.imagem);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
