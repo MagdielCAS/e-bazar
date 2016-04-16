@@ -28,17 +28,21 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
     }
 
     @Override
-    public ItemVestuarioAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_layout, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+        View view = LayoutInflater.
+                from(parent.getContext()).
+                inflate(R.layout.cardview_layout, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemVestuario item = itensVest.get(position);
-        holder.textViewTitleCar.setText(item.getIdTipo()+"onde aparece saporra");
+        holder.vTipo.setText("Tipo: "+item.getIdTipo());
+        holder.vTamanho.setText("Tamanho: "+item.getTamanho());
+        holder.vCor.setText("Cor: "+item.getCor());
+        holder.vOng.setText("Ong: "+item.getOng());
     }
 
     @Override
@@ -51,9 +55,19 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textViewTitleCar;
+        public TextView vTamanho;
+        public TextView vCor;
+        public TextView vTipo;
+        public TextView vOng;
+
         public ViewHolder(View view) {
             super(view);
+
+            vTamanho = (TextView) view.findViewById(R.id.tamanho);
+            vCor = (TextView) view.findViewById(R.id.cor);
+            vOng = (TextView) view.findViewById(R.id.ong);
+            vTipo = (TextView) view.findViewById(R.id.tipo);
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,8 +76,6 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
                     }
                 }
             });
-
-            textViewTitleCar = (TextView) view.findViewById(R.id.teste);
         }
     }
 

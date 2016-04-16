@@ -7,12 +7,12 @@ public class ItemVestuario {
 
     /*Classe que define os objetos do vestuário*/
 
-    private String tamanho;
-    private String cor;
-    private int estadoConservacao;
-    private double preco;
-    private String ong;
-    private int idTipo;
+    protected String tamanho;
+    protected String cor;
+    protected int estadoConservacao;
+    protected double preco;
+    protected String ong;
+    protected int idTipo;
 
     public String getTamanho() {
         return tamanho;

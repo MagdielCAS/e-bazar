@@ -45,7 +45,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view); //pega o id do layout para alocar os cardview dinamicamente
+        recyclerView = (RecyclerView) findViewById(R.id.cardList); //pega o id do layout para alocar os cardview dinamicamente
         recyclerView.setHasFixedSize(true); //Seta os elementos de tamanho fixo, ajudar a ganhar desempenho
 
         linearLayoutManager = new LinearLayoutManager(this); //Define como os dados são apresentados no recycler view
@@ -124,8 +124,8 @@ public class ListaVestuarioActivity extends AppCompatActivity
     @Override
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
-        Toast.makeText(this, "Selected Item: " + selectedItem.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
         itensVest.remove(position);
-        adapter.notifyItemRemoved(position);
+       adapter.notifyItemRemoved(position);
     }
 }
