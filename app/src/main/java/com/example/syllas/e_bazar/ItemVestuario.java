@@ -18,7 +18,7 @@ public class ItemVestuario{
     private String ong;
     private int idTipo;
     private String tipo;
-    private int id;
+    private String _id;
     private int img;
 
     public String getTamanho() {
@@ -71,6 +71,9 @@ public class ItemVestuario{
 
     public void ItemVestuario(){
     }
+    public void ItemVestuario(int i) {
+        setIdTipo(i);
+    }
     public void ItemVestuario(String ong,String tamanho,String cor,int estadoConservacao,double preco,int idTipo,int id){
         setOng(ong);
         setTamanho(tamanho);
@@ -95,8 +98,12 @@ public class ItemVestuario{
             case 6:
                 return "Saia";
             default:
-                return "Tipo "+this.getIdTipo();
+                return this.tipo;
         }
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setTipo(String tipo,int id) {
@@ -104,12 +111,12 @@ public class ItemVestuario{
         this.setIdTipo(id);
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this._id = id;
     }
 
     public int getImg() {

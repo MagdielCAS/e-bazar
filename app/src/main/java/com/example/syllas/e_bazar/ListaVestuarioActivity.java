@@ -1,6 +1,9 @@
 package com.example.syllas.e_bazar;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +28,9 @@ public class ListaVestuarioActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
+    private DatabaseHelper helper;
+    private EbazarDAO teste;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,12 @@ public class ListaVestuarioActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
-        
+        helper = new DatabaseHelper(this);
+        teste = new EbazarDAO(this);
+
+      //  criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
+        itensVest = teste.listarVestuario();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,14 +68,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
 
     private void criarVestFake() {
         for(int i = 0; i<10;i++){
-            ItemVestuario sampleVest = new ItemVestuario();
-            sampleVest.setTamanho("tam:" + i);
-            sampleVest.setPreco(i + 0.5);
-            sampleVest.setOng("Ong" + i);
-            sampleVest.setIdTipo(i);
-            sampleVest.setCor("cor" + i);
-            sampleVest.setEstadoConservacao(4);
-            itensVest.add(sampleVest);
+
         }
     }
 
@@ -124,7 +127,13 @@ public class ListaVestuarioActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
         Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
+        teste.RemoverBDVestuario(itensVest.get(position).getId());
         itensVest.remove(position);
         adapter.notifyItemRemoved(position);
+    }
+
+    protected void onDestroy() {
+        helper.close();
+        super.onDestroy();
     }
 }
