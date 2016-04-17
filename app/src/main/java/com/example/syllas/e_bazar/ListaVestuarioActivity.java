@@ -108,7 +108,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cadastroVest) {
-            // Handle the camera action
+            startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
 
         } else if (id == R.id.listOng) {
