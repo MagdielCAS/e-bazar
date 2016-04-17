@@ -75,7 +75,7 @@ public class ListaOngActivity extends AppCompatActivity
         if (id == R.id.cadastroVest) {
             // Handle the camera action
         } else if (id == R.id.cadastroOng) {
-
+            startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.listVest) {
             startActivity(new Intent(this, ListaVestuarioActivity.class));
         }
