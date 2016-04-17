@@ -66,7 +66,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
             sampleVest.setOng("Ong" + i);
             sampleVest.setIdTipo(i);
             sampleVest.setCor("cor" + i);
-            sampleVest.setEstadoConservacao(i);
+            sampleVest.setEstadoConservacao(4);
             itensVest.add(sampleVest);
         }
     }

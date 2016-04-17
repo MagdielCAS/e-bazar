@@ -13,7 +13,7 @@ public class ItemVestuario{
 
     private String tamanho;
     private String cor;
-    private int estadoConservacao;
+    private float estadoConservacao;
     private double preco;
     private String ong;
     private int idTipo;
@@ -37,11 +37,11 @@ public class ItemVestuario{
         this.cor = cor;
     }
 
-    public int getEstadoConservacao() {
+    public float getEstadoConservacao() {
         return estadoConservacao;
     }
 
-    public void setEstadoConservacao(int estadoConservacao) {
+    public void setEstadoConservacao(float estadoConservacao) {
         this.estadoConservacao = estadoConservacao;
     }
 
@@ -134,4 +134,6 @@ public class ItemVestuario{
     public void setImg(int idImg) {
         this.img = idImg;
     }
+
+
 }
