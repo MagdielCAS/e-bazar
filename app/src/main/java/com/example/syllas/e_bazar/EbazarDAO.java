@@ -40,6 +40,31 @@ public class EbazarDAO {
         return vestuario;
     }
 
+    public List<ItemOng> listarOng(){
+        Cursor cursor = getDb().query(DatabaseHelper.Ong.TABELA,
+                DatabaseHelper.Ong.COLUNAS,
+                null, null, null, null,null);
+        List<ItemOng> ongList = new ArrayList<>();
+        while(cursor.moveToNext()){
+            ItemOng ong = criarOngList(cursor);
+            ongList.add(ong);
+        }
+        cursor.close();
+        return ongList;
+    }
+
+    private ItemOng criarOngList(Cursor cursor) {
+        ItemOng ong = new ItemOng();
+        ong.setId(cursor.getString(0));
+        ong.setNome(cursor.getString(1));
+        ong.setIntuito(cursor.getString(2));
+        ong.setCidade(cursor.getString(3));
+        ong.setUF(cursor.getString(4));
+        ong.setValorArrecadado(cursor.getDouble(5));
+        ong.setImg(cursor.getString(6));
+        return ong;
+    }
+
     private ItemVestuario criarVestuario(Cursor cursor) {
         ItemVestuario vest = new ItemVestuario();
         vest.setId(cursor.getString(0));
@@ -70,9 +95,31 @@ public class EbazarDAO {
         }
     }
 
+    public void InserirBDOng(List<ItemOng> ongs){
+        db = getDb();
+        ContentValues values = new ContentValues();
+        for(ItemOng ong:ongs){
+            values.put(DatabaseHelper.Ong.CIDADE, ong.getCidade());
+            values.put(DatabaseHelper.Ong.NOME, ong.getNome());
+            values.put(DatabaseHelper.Ong.INTUITO, ong.getIntuito());
+            values.put(DatabaseHelper.Ong.CIDADE, ong.getCidade());
+            values.put(DatabaseHelper.Ong.ESTADO, ong.getUF());
+            values.put(DatabaseHelper.Ong.VALOR_ARRECADADO, ong.getValorArrecadado());
+            values.put(DatabaseHelper.Ong.IMAGEM, ong.getImg());
+            db.insert(DatabaseHelper.Ong.TABELA, null, values);
+        }
+    }
+
     public void RemoverBDVestuario(String id){
         db = getDb();
         String where[] = new String[]{id};
         db.delete(DatabaseHelper.Vestuario.TABELA,DatabaseHelper.Vestuario._ID + " = ?",where);
     }
+
+    public void RemoverBDOng(String id){
+        db = getDb();
+        String where[] = new String[]{id};
+        db.delete(DatabaseHelper.Ong.TABELA,DatabaseHelper.Ong._ID + " = ?",where);
+    }
+
 }

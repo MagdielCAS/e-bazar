@@ -5,10 +5,12 @@ package com.example.syllas.e_bazar;
  */
 public class ItemOng {
 
+    private String id;
     private String nome;
     private String intuito;
     private String cidade;
     private String UF;
+    private String img;
     private double valorArrecadado;
 
 
@@ -62,4 +64,19 @@ public class ItemOng {
         this.setUF(estado);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }

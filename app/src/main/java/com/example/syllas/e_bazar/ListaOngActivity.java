@@ -25,6 +25,7 @@ public class ListaOngActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
+    private EbazarDAO ebazarDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,9 @@ public class ListaOngActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ebazarDAO = new EbazarDAO(this);
         criarOngFake();
+        itensOng = ebazarDAO.listarOng();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -108,20 +111,28 @@ public class ListaOngActivity extends AppCompatActivity
     }
 
     private void criarOngFake() {
+        List<ItemOng> listOng = new ArrayList<ItemOng>();
         for(int i = 0; i<10;i++){
-            ItemOng sampleOng = new ItemOng();
-            sampleOng.setUF("CE"+i);
-            sampleOng.setIntuito("Beneficente " + i);
-            sampleOng.setCidade("asdasdasd" + i);
-            sampleOng.setNome("Ong nº " + i+",50");
-            sampleOng.setValorArrecadado(i);
-            itensOng.add(sampleOng);
+            ItemOng ong = new ItemOng();
+            ong.setNome("Ong "+i);
+            ong.setUF("UF"+i);
+            ong.setCidade("Cidade"+i);
+            ong.setIntuito("Intenção"+i);
+            ong.setValorArrecadado(i);
+            ong.setImg("asdas");
+            listOng.add(ong);
         }
+        ebazarDAO.InserirBDOng(listOng);
     }
 
     @Override
     public void onDataSelected(View view, int position) {
         ItemOng selectedItem = itensOng.get(position);
         Toast.makeText(this, "Ong Selecionada: "+selectedItem.getNome(), Toast.LENGTH_SHORT).show();
+    }
+
+    protected void onDestroy() {
+        ebazarDAO.close();
+        super.onDestroy();
     }
 }
