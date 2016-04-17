@@ -142,6 +142,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:clickable="true"
+                android:onClick="abrirGaleria"
                 android:src="@drawable/ic_add_a_photo_black_48dp"
                 android:layout_gravity="center" />
 
@@ -161,16 +163,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/ivFotoTirada1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/calcado"/>
+                android:layout_weight="1"
+                android:padding="10dp"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/ivFotoTirada2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/blusa"/>
+                android:layout_weight="1"
+                android:padding="10dp"/>
+            <ImageView
+                android:id="@+id/ivFotoTirada3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"/>
 
         </LinearLayout>
 
