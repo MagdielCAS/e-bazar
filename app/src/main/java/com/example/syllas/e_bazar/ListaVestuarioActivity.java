@@ -127,6 +127,6 @@ public class ListaVestuarioActivity extends AppCompatActivity
         ItemVestuario selectedItem  = itensVest.get(position);
         Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
         itensVest.remove(position);
-       adapter.notifyItemRemoved(position);
+        adapter.notifyItemRemoved(position);
     }
 }
