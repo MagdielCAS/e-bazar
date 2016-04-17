@@ -28,7 +28,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private EbazarDAO bazarDAO;
+    private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
 
 
     @Override
@@ -38,10 +38,10 @@ public class ListaVestuarioActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        bazarDAO = new EbazarDAO(this);
+        bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
-        criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
-        itensVest = bazarDAO.listarVestuario();
+        criarVestFake(); //exemplo de injeção de dados no bd (olhar metodo)
+        itensVest = bazarDAO.listarVestuario(); //array com os itens a serem exibidos
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,9 +65,10 @@ public class ListaVestuarioActivity extends AppCompatActivity
     }
 
     private void criarVestFake() {
-        List<ItemVestuario> listVest = new ArrayList<ItemVestuario>();
+        List<ItemVestuario> listVest = new ArrayList<ItemVestuario>(); //cria vetor
         for(int i = 0; i<10;i++){
-            ItemVestuario vest = new ItemVestuario();
+            ItemVestuario vest = new ItemVestuario(); //item do vetor
+            //adiciona informações
             vest.setIdTipo(i);
             vest.setTipo("Tipo " + i);
             vest.setTamanho("Tam " + i);
@@ -76,9 +77,9 @@ public class ListaVestuarioActivity extends AppCompatActivity
             vest.setEstadoConservacao(i % 5);
             vest.setOng("Ong " + i);
             vest.setImg("blabla" + i);
-            listVest.add(vest);
+            listVest.add(vest); //adiciona item ao vetor
         }
-        bazarDAO.InserirBDVestuario(listVest);
+        bazarDAO.InserirBDVestuario(listVest); //adiciona vetor ao banco de dados
     }
 
     @Override
