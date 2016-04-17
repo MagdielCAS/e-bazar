@@ -49,8 +49,8 @@ public class EbazarDAO {
         vest.setCor(cursor.getString(4));
         vest.setPreco(cursor.getDouble(5));
         vest.setEstadoConservacao(cursor.getFloat(6));
-        vest.setOng("teste");
-        vest.setImg(0);
+        vest.setOng(cursor.getString(7));
+        vest.setImg(cursor.getString(8));
         return vest;
     }
 
@@ -58,21 +58,21 @@ public class EbazarDAO {
         db = getDb();
         ContentValues values = new ContentValues();
         for(ItemVestuario vest:vestuario){
-            values.put("id_tipo", vest.getIdTipo());
-            values.put("tipo",vest.getTipo());
-            values.put("tamanho", vest.getTamanho());
-            values.put("cor",vest.getCor());
-            values.put("preco",vest.getPreco());
-            values.put("estado_de_conservacao", vest.getEstadoConservacao());
-            values.put("ong",vest.getOng());
-            values.put("nome_img_vest",vest.getImg());
-            db.insert("vestuario", null, values);
+            values.put(DatabaseHelper.Vestuario.ID_TIPO, vest.getIdTipo());
+            values.put(DatabaseHelper.Vestuario.TIPO,vest.getTipo());
+            values.put(DatabaseHelper.Vestuario.TAMANHO, vest.getTamanho());
+            values.put(DatabaseHelper.Vestuario.COR,vest.getCor());
+            values.put(DatabaseHelper.Vestuario.PRECO,vest.getPreco());
+            values.put(DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO, vest.getEstadoConservacao());
+            values.put(DatabaseHelper.Vestuario.ONG,vest.getOng());
+            values.put(DatabaseHelper.Vestuario.IMAGEM,vest.getImg());
+            db.insert(DatabaseHelper.Vestuario.TABELA, null, values);
         }
     }
 
     public void RemoverBDVestuario(String id){
         db = getDb();
         String where[] = new String[]{id};
-        db.delete(DatabaseHelper.Vestuario.TABELA,"_id = ?",where);
+        db.delete(DatabaseHelper.Vestuario.TABELA,DatabaseHelper.Vestuario._ID + " = ?",where);
     }
 }

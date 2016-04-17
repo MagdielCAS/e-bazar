@@ -19,7 +19,7 @@ public class ItemVestuario{
     private int idTipo;
     private String tipo;
     private String _id;
-    private int img;
+    private String img;
 
     public String getTamanho() {
         return tamanho;
@@ -138,8 +138,8 @@ public class ItemVestuario{
         }
     }
 
-    public void setImg(int idImg) {
-        this.img = idImg;
+    public void setImg(String Img) {
+        this.img = Img;
     }
 
 
