@@ -28,8 +28,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private DatabaseHelper helper;
-    private EbazarDAO teste;
+    private EbazarDAO bazarDAO;
 
 
     @Override
@@ -39,11 +38,10 @@ public class ListaVestuarioActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        helper = new DatabaseHelper(this);
-        teste = new EbazarDAO(this);
+        bazarDAO = new EbazarDAO(this);
 
-      //  criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
-        itensVest = teste.listarVestuario();
+        criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
+        itensVest = bazarDAO.listarVestuario();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,9 +65,20 @@ public class ListaVestuarioActivity extends AppCompatActivity
     }
 
     private void criarVestFake() {
+        List<ItemVestuario> listVest = new ArrayList<ItemVestuario>();
         for(int i = 0; i<10;i++){
-
+            ItemVestuario vest = new ItemVestuario();
+            vest.setIdTipo(i);
+            vest.setTipo("Tipo " + i);
+            vest.setTamanho("Tam " + i);
+            vest.setCor("Cor " + i);
+            vest.setPreco(i + (i % 2 == 0 ? 0.35 * i : 0.5 * i));
+            vest.setEstadoConservacao(i % 5);
+            vest.setOng("Ong " + i);
+            vest.setImg("blabla" + i);
+            listVest.add(vest);
         }
+        bazarDAO.InserirBDVestuario(listVest);
     }
 
     @Override
@@ -127,13 +136,13 @@ public class ListaVestuarioActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
         Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
-        teste.RemoverBDVestuario(itensVest.get(position).getId());
+        bazarDAO.RemoverBDVestuario(itensVest.get(position).getId());
         itensVest.remove(position);
         adapter.notifyItemRemoved(position);
     }
 
     protected void onDestroy() {
-        helper.close();
+        bazarDAO.close();
         super.onDestroy();
     }
 }
