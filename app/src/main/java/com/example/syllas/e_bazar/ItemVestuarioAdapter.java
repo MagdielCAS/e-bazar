@@ -46,7 +46,7 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
         holder.vTamanho.setText("Tamanho: "+item.getTamanho());
         holder.vCor.setText("Cor: "+item.getCor());
         holder.vOng.setText("Ong: "+item.getOng());
-        holder.vPreco.setText("Preco: "+item.getOng());
+        holder.vPreco.setText("Preco: "+item.getPreco());
         holder.vCons.setRating(item.getEstadoConservacao());
     }
 

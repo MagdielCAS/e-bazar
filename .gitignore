@@ -6,4 +6,6 @@
 .DS_Store
 /build
 /captures
-.idea/vcs.xml
+/.idea/vcs.xml
+/.idea/gradle.xml
+/.idea/modules.xml

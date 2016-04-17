@@ -9,7 +9,7 @@ public class ItemOng {
     private String intuito;
     private String cidade;
     private String UF;
-    private int valorArrecadado;
+    private double valorArrecadado;
 
 
     public String getNome() {
@@ -44,11 +44,11 @@ public class ItemOng {
         this.UF = UF;
     }
 
-    public int getValorArrecadado() {
+    public double getValorArrecadado() {
         return valorArrecadado;
     }
 
-    public void setValorArrecadado(int valorArrecadado) {
+    public void setValorArrecadado(double valorArrecadado) {
         this.valorArrecadado = valorArrecadado;
     }
 
