@@ -16,7 +16,7 @@
         <item
             android:id="@+id/listVest"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/listOng" />
+            android:title="@string/listVest" />
         <item
             android:id="@+id/listOng"
             android:icon="@drawable/ic_menu_gallery"
