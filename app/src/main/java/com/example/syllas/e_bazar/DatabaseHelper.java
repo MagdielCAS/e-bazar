@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String CIDADE = "cidade";
         public static final String ESTADO = "estado";
         public static final String VALOR_ARRECADADO = "valor_arrecadado";
-        public static final String IMAGEM = "imagem";
+        public static final String IMAGEM = "nome_img_ong";
         public static final String[] COLUNAS = new String[]{ _ID, NOME, INTUITO, CIDADE,
                 ESTADO, VALOR_ARRECADADO, IMAGEM };
     }
@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " tamanho TEXT, cor TEXT, " +
                 " preco DOUBLE, estado_de_conservacao FLOAT, "+
                 "ong TEXT, nome_img_vest TEXT);");
-        db.execSQL("CREATE TABLE ongs (_id INTEGER PRIMARY KEY," +
+        db.execSQL("CREATE TABLE ongs ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " nome TEXT, intuito TEXT, cidade TEXT," +
                 " estado TEXT, valor_arrecadado DOUBLE, nome_img_ong TEXT);");
 
