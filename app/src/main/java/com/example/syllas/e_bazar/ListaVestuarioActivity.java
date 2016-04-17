@@ -2,8 +2,6 @@ package com.example.syllas.e_bazar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -61,7 +59,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     private void criarVestFake() {
         for(int i = 0; i<10;i++){
             ItemVestuario sampleVest = new ItemVestuario();
-            sampleVest.setTamanho("tam:"+i);
+            sampleVest.setTamanho("tam:" + i);
             sampleVest.setPreco(i + 0.5);
             sampleVest.setOng("Ong" + i);
             sampleVest.setIdTipo(i);
@@ -84,7 +82,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.lista_vestuario, menu);
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
         return true;
     }
 
