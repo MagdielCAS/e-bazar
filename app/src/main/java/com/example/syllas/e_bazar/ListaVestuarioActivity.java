@@ -42,7 +42,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         helper = new DatabaseHelper(this);
         teste = new EbazarDAO(this);
 
-        criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
+      //  criarVestFake(); //Apenas para teste, preenche a lista com vestuarios falsos
         itensVest = teste.listarVestuario();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -67,19 +67,8 @@ public class ListaVestuarioActivity extends AppCompatActivity
     }
 
     private void criarVestFake() {
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
         for(int i = 0; i<10;i++){
-            values.put("id_tipo", i);
-            values.put("tipo","tipo "+i);
-            values.put("tamanho", "tam: " + i);
-            values.put("cor","cor"+i);
-            values.put("preco",i+0.5);
-            values.put("estado_de_conservacao", 3.5);
-            values.put("ong","Ong "+i);
-            values.put("nome_img_vest","teste "+i);
-            db.insert("vestuario", null, values);
+
         }
     }
 
@@ -138,6 +127,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
         Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
+        teste.RemoverBDVestuario(itensVest.get(position).getId());
         itensVest.remove(position);
         adapter.notifyItemRemoved(position);
     }

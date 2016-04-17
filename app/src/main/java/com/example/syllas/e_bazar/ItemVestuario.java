@@ -18,7 +18,7 @@ public class ItemVestuario{
     private String ong;
     private int idTipo;
     private String tipo;
-    private int id;
+    private String _id;
     private int img;
 
     public String getTamanho() {
@@ -111,12 +111,12 @@ public class ItemVestuario{
         this.setIdTipo(id);
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this._id = id;
     }
 
     public int getImg() {

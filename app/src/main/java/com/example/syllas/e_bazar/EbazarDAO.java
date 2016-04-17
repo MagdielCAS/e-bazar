@@ -1,5 +1,6 @@
 package com.example.syllas.e_bazar;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -41,6 +42,7 @@ public class EbazarDAO {
 
     private ItemVestuario criarVestuario(Cursor cursor) {
         ItemVestuario vest = new ItemVestuario();
+        vest.setId(cursor.getString(0));
         vest.setIdTipo(cursor.getInt(1));
         vest.setTipo(cursor.getString(2));
         vest.setTamanho(cursor.getString(3));
@@ -50,5 +52,27 @@ public class EbazarDAO {
         vest.setOng("teste");
         vest.setImg(0);
         return vest;
+    }
+
+    public void InserirBDVestuario(List<ItemVestuario> vestuario){
+        db = getDb();
+        ContentValues values = new ContentValues();
+        for(ItemVestuario vest:vestuario){
+            values.put("id_tipo", vest.getIdTipo());
+            values.put("tipo",vest.getTipo());
+            values.put("tamanho", vest.getTamanho());
+            values.put("cor",vest.getCor());
+            values.put("preco",vest.getPreco());
+            values.put("estado_de_conservacao", vest.getEstadoConservacao());
+            values.put("ong",vest.getOng());
+            values.put("nome_img_vest",vest.getImg());
+            db.insert("vestuario", null, values);
+        }
+    }
+
+    public void RemoverBDVestuario(String id){
+        db = getDb();
+        String where[] = new String[]{id};
+        db.delete(DatabaseHelper.Vestuario.TABELA,"_id = ?",where);
     }
 }
