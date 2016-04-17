@@ -7,13 +7,20 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/novoVest" />
         <item
-            android:id="@+id/listOng"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/listOng" />
-        <item
             android:id="@+id/cadastroOng"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/novaOng" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/listVest"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/listOng" />
+        <item
+            android:id="@+id/listOng"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/listOng" />
     </group>
 
 </menu>
