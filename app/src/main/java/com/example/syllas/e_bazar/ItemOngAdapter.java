@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -64,6 +65,7 @@ public class ItemOngAdapter extends RecyclerView.Adapter<ItemOngAdapter.ViewHold
         public TextView vEstado;
         public TextView vPreco;
         public ImageView vImg;
+
 
         public ViewHolder(View view) {
             super(view);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
         holder.vCor.setText("Cor: "+item.getCor());
         holder.vOng.setText("Ong: "+item.getOng());
         holder.vPreco.setText("Preco: "+item.getOng());
+        holder.vCons.setRating(item.getEstadoConservacao());
     }
 
     @Override
@@ -64,6 +66,7 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
         public TextView vOng;
         public TextView vPreco;
         public ImageView vImg;
+        public RatingBar vCons;
 
         public ViewHolder(View view) {
             super(view);
@@ -74,6 +77,7 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
             vTipo = (TextView) view.findViewById(R.id.tipo);
             vPreco = (TextView) view.findViewById(R.id.preco);
             vImg = (ImageView) view.findViewById(R.id.imagem);
+            vCons = (RatingBar) view.findViewById(R.id.ratingBar);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
