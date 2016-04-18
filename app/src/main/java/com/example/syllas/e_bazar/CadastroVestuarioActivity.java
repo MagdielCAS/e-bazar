@@ -358,4 +358,5 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
     }
 
 
+
 }

@@ -12,4 +12,5 @@
     <string name="title_activity_lista_ong">ONGs</string>
     <string name="listVest">Listar Vestuário</string>
     <string name="title_activity_cadastro_vestuario">Cadastro Vestuario</string>
+    <string name="carrinho">Carrinho</string>
 </resources>

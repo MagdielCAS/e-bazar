@@ -23,4 +23,10 @@
             android:title="@string/listOng" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/carrinho"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/carrinho" />
+    </group>
 </menu>
