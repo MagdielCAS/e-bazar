@@ -80,18 +80,8 @@ public class EbazarDAO {
     }
 
     public void InserirBDVestuario(List<ItemVestuario> vestuario){
-        db = getDb();
-        ContentValues values = new ContentValues();
         for(ItemVestuario vest:vestuario){
-            values.put(DatabaseHelper.Vestuario.ID_TIPO, vest.getIdTipo());
-            values.put(DatabaseHelper.Vestuario.TIPO,vest.getTipo());
-            values.put(DatabaseHelper.Vestuario.TAMANHO, vest.getTamanho());
-            values.put(DatabaseHelper.Vestuario.COR,vest.getCor());
-            values.put(DatabaseHelper.Vestuario.PRECO,vest.getPreco());
-            values.put(DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO, vest.getEstadoConservacao());
-            values.put(DatabaseHelper.Vestuario.ONG,vest.getOng());
-            values.put(DatabaseHelper.Vestuario.IMAGEM,vest.getImg());
-            db.insert(DatabaseHelper.Vestuario.TABELA, null, values);
+            InserirBDVestuario(vest);
         }
     }
 
@@ -106,22 +96,14 @@ public class EbazarDAO {
         values.put(DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO, vest.getEstadoConservacao());
         values.put(DatabaseHelper.Vestuario.ONG,vest.getOng());
         values.put(DatabaseHelper.Vestuario.IMAGEM,vest.getImg());
+        values.put(DatabaseHelper.Vestuario.CARRINHO,vest.setCarrinho);
         db.insert(DatabaseHelper.Vestuario.TABELA, null, values);
 
     }
 
     public void InserirBDOng(List<ItemOng> ongs){
-        db = getDb();
-        ContentValues values = new ContentValues();
         for(ItemOng ong:ongs){
-            values.put(DatabaseHelper.Ong.CIDADE, ong.getCidade());
-            values.put(DatabaseHelper.Ong.NOME, ong.getNome());
-            values.put(DatabaseHelper.Ong.INTUITO, ong.getIntuito());
-            values.put(DatabaseHelper.Ong.CIDADE, ong.getCidade());
-            values.put(DatabaseHelper.Ong.ESTADO, ong.getUF());
-            values.put(DatabaseHelper.Ong.VALOR_ARRECADADO, ong.getValorArrecadado());
-            values.put(DatabaseHelper.Ong.IMAGEM, ong.getImg());
-            db.insert(DatabaseHelper.Ong.TABELA, null, values);
+            InserirBDOng(ong);
         }
     }
 
