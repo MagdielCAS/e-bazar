@@ -45,12 +45,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE vestuario ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE IF NOT EXISTS vestuario ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " id_tipo INTEGER, tipo TEXT, " +
                 " tamanho TEXT, cor TEXT, " +
                 " preco DOUBLE, estado_de_conservacao FLOAT, "+
                 "ong TEXT, nome_img_vest TEXT);");
-        db.execSQL("CREATE TABLE ongs ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE IF NOT EXISTS ongs ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " nome TEXT, intuito TEXT, cidade TEXT," +
                 " estado TEXT, valor_arrecadado DOUBLE, nome_img_ong TEXT);");
 

@@ -223,6 +223,12 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
     }
 
 
+    //Cadastra um vestuario
+    public void cadastraVestuario(View view){
+        ItemVestuario item = new ItemVestuario();
+    }
+
+
     //Abre a camera nativa do smartphone
     public void tirarFoto(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
