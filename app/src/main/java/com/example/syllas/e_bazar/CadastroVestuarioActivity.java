@@ -31,6 +31,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity {
     int cont = 0;
     private Uri fileUri;
     private String selectedImagePath;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

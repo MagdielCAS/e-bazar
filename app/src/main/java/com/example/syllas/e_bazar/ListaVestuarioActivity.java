@@ -142,8 +142,10 @@ public class ListaVestuarioActivity extends AppCompatActivity
         adapter.notifyItemRemoved(position);
     }
 
+    @Override
     protected void onDestroy() {
         bazarDAO.close();
         super.onDestroy();
     }
+
 }
