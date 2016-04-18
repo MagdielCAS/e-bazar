@@ -40,7 +40,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
 
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
-        criarVestFake(); //exemplo de injeção de dados no bd (olhar metodo)
+        //criarVestFake(); //exemplo de injeção de dados no bd (olhar metodo)
         itensVest = bazarDAO.listarVestuario(); //array com os itens a serem exibidos
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

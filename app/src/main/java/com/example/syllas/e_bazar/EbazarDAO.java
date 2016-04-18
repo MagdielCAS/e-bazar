@@ -70,11 +70,12 @@ public class EbazarDAO {
         vest.setId(cursor.getString(0));
         vest.setIdTipo(cursor.getInt(1));
         vest.setTipo(cursor.getString(2));
-        vest.setTamanho(cursor.getString(3));
-        vest.setCor(cursor.getString(4));
-        vest.setPreco(cursor.getDouble(5));
-        vest.setEstadoConservacao(cursor.getFloat(6));
-        vest.setOng(cursor.getString(7));
+        vest.setNome(cursor.getString(3));
+        vest.setTamanho(cursor.getString(4));
+        vest.setCor(cursor.getString(5));
+        vest.setPreco(cursor.getDouble(6));
+        vest.setEstadoConservacao(cursor.getFloat(7));
+        vest.setOng(cursor.getString(8));
         return vest;
     }
 
@@ -89,6 +90,7 @@ public class EbazarDAO {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.Vestuario.ID_TIPO, vest.getIdTipo());
         values.put(DatabaseHelper.Vestuario.TIPO,vest.getTipo());
+        values.put(DatabaseHelper.Vestuario.NOME,vest.getNome());
         values.put(DatabaseHelper.Vestuario.TAMANHO, vest.getTamanho());
         values.put(DatabaseHelper.Vestuario.COR,vest.getCor());
         values.put(DatabaseHelper.Vestuario.PRECO,vest.getPreco());

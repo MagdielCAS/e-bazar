@@ -145,8 +145,6 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
                 //pega nome pela posição
                 tipo = parent.getItemAtPosition(posicao).toString();
-                //imprime um Toast na tela com o nome que foi selecionado
-                Toast.makeText(CadastroVestuarioActivity.this, "Tipo Selecionado: " + tipo, Toast.LENGTH_LONG).show();
 
                 if (tipo== "Calçado"){
                     tamanhos.clear();
@@ -197,9 +195,6 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
                 //pega nome pela posição
                 tamanho = parent.getItemAtPosition(posicao).toString();
-                //imprime um Toast na tela com o nome que foi selecionado
-                Toast.makeText(CadastroVestuarioActivity.this, "Tamanho Selecionado: " + tamanho, Toast.LENGTH_LONG).show();
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -213,9 +208,6 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
                 //pega nome pela posição
                 ong = parent.getItemAtPosition(posicao).toString();
-                //imprime um Toast na tela com o nome que foi selecionado
-                Toast.makeText(CadastroVestuarioActivity.this, "Ong Selecionada: " + ong, Toast.LENGTH_LONG).show();
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -252,7 +244,9 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         item.setFotos(fotos);
         item.setCarrinho(false);
 
+        bazarDAO.InserirBDVestuario(item);
 
+        startActivity(new Intent(this, ListaVestuarioActivity.class));
     }
 
     public int pegarIdTipo(String tipo){

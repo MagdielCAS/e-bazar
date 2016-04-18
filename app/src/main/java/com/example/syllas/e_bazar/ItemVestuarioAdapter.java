@@ -42,7 +42,8 @@ public class ItemVestuarioAdapter extends RecyclerView.Adapter<ItemVestuarioAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemVestuario item = itensVest.get(position);
         holder.vImg.setImageResource(item.getImg());
-        holder.vTipo.setText(item.getTipo());
+        holder.vTipo.setText(item.getNome());//vTipo na verdade é Nome.
+        System.out.println(item.getNome());
         holder.vTamanho.setText("Tamanho: "+item.getTamanho());
         holder.vCor.setText("Cor: "+item.getCor());
         holder.vOng.setText(item.getOng());

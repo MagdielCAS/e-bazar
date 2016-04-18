@@ -16,13 +16,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String _ID = "_id";
         public static final String ID_TIPO = "id_tipo";
         public static final String TIPO = "tipo";
+        public static final String NOME = "nome";
         public static final String TAMANHO = "tamanho";
         public static final String COR = "cor";
         public static final String PRECO = "preco";
         public static final String ESTADO_DE_CONSERVACAO = "estado_de_conservacao";
         public static final String ONG = "ong";
         public static final String CARRINHO = "carrinho";
-        public static final String[] COLUNAS = new String[]{ _ID, ID_TIPO, TIPO,
+        public static final String[] COLUNAS = new String[]{ _ID, ID_TIPO, TIPO, NOME,
                 TAMANHO, COR, PRECO, ESTADO_DE_CONSERVACAO,ONG,CARRINHO };
     }
 
@@ -45,8 +46,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS vestuario ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " id_tipo INTEGER, tipo TEXT, " +
+        db.execSQL("CREATE TABLE vestuario ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " id_tipo INTEGER, tipo TEXT, nome TEXT, " +
                 " tamanho TEXT, cor TEXT, " +
                 " preco DOUBLE, estado_de_conservacao FLOAT, "+
                 "ong TEXT, carrinho BOOLEAN);");
