@@ -30,6 +30,7 @@
                 android:layout_weight="1"/>
 
             <EditText
+                android:id="@+id/etTituloVestuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"/>
@@ -102,6 +103,7 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
             <EditText
+                android:id="@+id/etCorVestuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2" />
@@ -204,8 +206,10 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btCadastrarVetuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="cadastraVestuario"
             android:layout_gravity="center"
             android:text="cadastrar" />
 

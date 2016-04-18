@@ -3,6 +3,9 @@ package com.example.syllas.e_bazar;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
+
+import java.util.ArrayList;
 
 /**
  * Created by magdi on 15/04/2016.
@@ -11,6 +14,7 @@ public class ItemVestuario{
 
     /*Classe que define os objetos do vestuário*/
 
+    private String nome;
     private String tamanho;
     private String cor;
     private float estadoConservacao;
@@ -20,6 +24,7 @@ public class ItemVestuario{
     private String tipo;
     private String _id;
     private String img;
+    private ArrayList<Uri> fotos;
 
     public String getTamanho() {
         return tamanho;
@@ -143,4 +148,19 @@ public class ItemVestuario{
     }
 
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public ArrayList<Uri> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(ArrayList<Uri> fotos) {
+        this.fotos = fotos;
+    }
 }

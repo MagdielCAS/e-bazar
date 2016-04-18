@@ -24,7 +24,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -219,6 +221,25 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
 
             }
         });
+
+    }
+
+
+    //Cadastra um vestuario
+    public void cadastraVestuario(View view){
+        ItemVestuario item = new ItemVestuario();
+        EditText etNome = (EditText) findViewById(R.id.etTituloVestuario);
+        EditText etCor = (EditText) findViewById(R.id.etCorVestuario);
+        RatingBar rtBar = (RatingBar) findViewById(R.id.ratingbarVest);
+        ImageView iv1 = (ImageView) findViewById(R.id.ivFotoTirada1);
+        ImageView iv2 = (ImageView) findViewById(R.id.ivFotoTirada2);
+        ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
+
+        item.setNome(etNome.getText().toString());
+        item.setTipo(tipo);
+        item.setTamanho(tamanho);
+        item.setOng(ong);
+
 
     }
 
