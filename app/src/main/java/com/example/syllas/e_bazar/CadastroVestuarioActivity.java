@@ -15,7 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -25,7 +28,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CadastroVestuarioActivity extends AppCompatActivity {
     int cont = 0;
@@ -33,12 +38,173 @@ public class CadastroVestuarioActivity extends AppCompatActivity {
     private String selectedImagePath;
     
 
+    private Spinner spnTipo,spnTamanho, spnOngIndicada;
+    private List<String> tamanhos = new ArrayList<String>();
+    private List<String> tipos = new ArrayList<String>();
+    private List<String> NomesOng = new ArrayList<String>();
+    private String tipo,tamanho,ong;
+
+    private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
+    private List<ItemOng> itemOng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_vestuario);
 
+        bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
+
+        //cria dados fakes (Apagar depois)
+        itemOng = new ArrayList<ItemOng>();
+        for(int i = 0; i<10;i++){
+            ItemOng ong = new ItemOng(); //item do vetor
+            //adiciona informações
+            ong.setCidade("Bla bla");
+            ong.setId(""+i+"");
+            ong.setImg("");
+            ong.setIntuito("");
+            ong.setNome("Ong "+i+" :)");
+            ong.setUF("");
+            itemOng.add(ong); //adiciona item ao vetor
+        }
+
+
+        bazarDAO.InserirBDOng(itemOng);
+
+        itemOng.clear();
+        NomesOng.clear();
+
+        itemOng = bazarDAO.listarOng();
+        for (int i = 0; i<itemOng.size(); i++ ){
+            NomesOng.add(itemOng.get(i).getNome());
+        }
+
+
+
+        //Adicionando Nomes no ArrayList
+        tipos.add("Blusa");
+        tipos.add("Calça");
+        tipos.add("Calçado");
+        tipos.add("Meia");
+        tipos.add("Saia");
+        tipos.add("Vestido");
+        tipos.add("Outro");
+
+
+        tamanhos.add("Selecione tipo");
+
+
+
+
+        //Identifica o Spinner no layout
+        spnTipo = (Spinner) findViewById(R.id.spnTipo);
+        spnTamanho = (Spinner) findViewById(R.id.spnTamanho);
+        spnOngIndicada = (Spinner) findViewById(R.id.spnOng);
+        //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList tipos
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipos);
+        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnTipo.setAdapter(spinnerArrayAdapter);
+
+        //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList Tamanhos
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tamanhos);
+        ArrayAdapter<String> spinnerArrayAdapter2 = arrayAdapter2;
+        spinnerArrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnTamanho.setAdapter(spinnerArrayAdapter2);
+
+        //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList Tamanhos
+        ArrayAdapter<String> arrayAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, NomesOng);
+        ArrayAdapter<String> spinnerArrayAdapter3 = arrayAdapter3;
+        spinnerArrayAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnOngIndicada.setAdapter(spinnerArrayAdapter3);
+
+        //Método do Spinner para capturar o item selecionado
+        spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
+                //pega nome pela posição
+                tipo = parent.getItemAtPosition(posicao).toString();
+                //imprime um Toast na tela com o nome que foi selecionado
+                Toast.makeText(CadastroVestuarioActivity.this, "Tipo Selecionado: " + tipo, Toast.LENGTH_LONG).show();
+
+                if (tipo== "Calçado"){
+                    tamanhos.clear();
+                    tamanhos.add("30");
+                    tamanhos.add("32");
+                    tamanhos.add("34");
+                    tamanhos.add("36");
+                    tamanhos.add("37");
+                    tamanhos.add("38");
+                    tamanhos.add("39");
+                    tamanhos.add("40");
+                    tamanhos.add("Outro");
+                }else if(tipo == "Blusa" || tipo == "Meia"|| tipo=="Vestido"){
+                    tamanhos.clear();
+                    tamanhos.add("PP");
+                    tamanhos.add("P");
+                    tamanhos.add("M");
+                    tamanhos.add("G");
+                    tamanhos.add("GG");
+                    tamanhos.add("Outro");
+                }else if(tipo == "Calça" || tipo == "Saia" ){
+                    tamanhos.clear();
+                    tamanhos.add("34");
+                    tamanhos.add("36");
+                    tamanhos.add("38");
+                    tamanhos.add("40");
+                    tamanhos.add("42");
+                    tamanhos.add("44");
+                    tamanhos.add("46");
+                    tamanhos.add("48");
+                    tamanhos.add("Outro");
+
+                }
+
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Método do Spinner para capturar o item selecionado
+        spnTamanho.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
+                //pega nome pela posição
+                tamanho = parent.getItemAtPosition(posicao).toString();
+                //imprime um Toast na tela com o nome que foi selecionado
+                Toast.makeText(CadastroVestuarioActivity.this, "Tamanho Selecionado: " + tamanho, Toast.LENGTH_LONG).show();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Método do Spinner para capturar o item selecionado
+        spnOngIndicada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
+                //pega nome pela posição
+                ong = parent.getItemAtPosition(posicao).toString();
+                //imprime um Toast na tela com o nome que foi selecionado
+                Toast.makeText(CadastroVestuarioActivity.this, "Ong Selecionada: " + ong, Toast.LENGTH_LONG).show();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
+
+
 
     //Abre a camera nativa do smartphone
     public void tirarFoto(View view) {
