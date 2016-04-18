@@ -235,10 +235,15 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         ImageView iv2 = (ImageView) findViewById(R.id.ivFotoTirada2);
         ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
 
+
         item.setNome(etNome.getText().toString());
         item.setTipo(tipo);
         item.setTamanho(tamanho);
         item.setOng(ong);
+        item.setCor(etCor.getText().toString());
+        item.setEstadoConservacao(rtBar.getRating());
+        iv1.getDrawable();
+
 
 
     }
