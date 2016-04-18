@@ -25,6 +25,7 @@ public class ItemVestuario{
     private String _id;
     private String img;
     private ArrayList<Uri> fotos;
+    private boolean carrinho;
 
     public String getTamanho() {
         return tamanho;
@@ -162,5 +163,13 @@ public class ItemVestuario{
 
     public void setFotos(ArrayList<Uri> fotos) {
         this.fotos = fotos;
+    }
+
+    public boolean isCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(boolean carrinho) {
+        this.carrinho = carrinho;
     }
 }
