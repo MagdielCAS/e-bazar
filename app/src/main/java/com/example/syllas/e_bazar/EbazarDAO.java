@@ -96,7 +96,7 @@ public class EbazarDAO {
         values.put(DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO, vest.getEstadoConservacao());
         values.put(DatabaseHelper.Vestuario.ONG,vest.getOng());
         values.put(DatabaseHelper.Vestuario.IMAGEM,vest.getImg());
-        values.put(DatabaseHelper.Vestuario.CARRINHO,vest.setCarrinho);
+        values.put(DatabaseHelper.Vestuario.CARRINHO,vest.isCarrinho());
         db.insert(DatabaseHelper.Vestuario.TABELA, null, values);
 
     }
