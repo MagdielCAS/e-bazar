@@ -32,7 +32,9 @@
             android:name=".CadastroVestuarioActivity"
             android:label="@string/title_activity_cadastro_vestuario"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CarrinhoActivity"></activity>
+        <activity android:name=".CarrinhoActivity"
+            android:label="@string/title_activity_carrinho"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
