@@ -40,14 +40,45 @@ public class CadastroVestuarioActivity extends AppCompatActivity {
     private Spinner spnTipo,spnTamanho, spnOngIndicada;
     private List<String> tamanhos = new ArrayList<String>();
     private List<String> tipos = new ArrayList<String>();
-    private List<String> ongs = new ArrayList<String>();
+    private List<String> NomesOng = new ArrayList<String>();
     private String tipo,tamanho,ong;
 
+    private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
+    private List<ItemOng> itemOng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_vestuario);
+
+        bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
+
+        //cria dados fakes (Apagar depois)
+        itemOng = new ArrayList<ItemOng>();
+        for(int i = 0; i<10;i++){
+            ItemOng ong = new ItemOng(); //item do vetor
+            //adiciona informações
+            ong.setCidade("Bla bla");
+            ong.setId(""+i+"");
+            ong.setImg("");
+            ong.setIntuito("");
+            ong.setNome("Ong "+i+" :)");
+            ong.setUF("");
+            itemOng.add(ong); //adiciona item ao vetor
+        }
+
+
+        bazarDAO.InserirBDOng(itemOng);
+
+        itemOng.clear();
+        NomesOng.clear();
+
+        itemOng = bazarDAO.listarOng();
+        for (int i = 0; i<itemOng.size(); i++ ){
+            NomesOng.add(itemOng.get(i).getNome());
+        }
+
+
 
         //Adicionando Nomes no ArrayList
         tipos.add("Blusa");
@@ -61,12 +92,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity {
 
         tamanhos.add("Selecione tipo");
 
-        //Preencher pelo bd
-        ongs.add("Ong1");
-        ongs.add("Ong2");
-        ongs.add("Ong3");
-        ongs.add("Ong4");
-        ongs.add("Ong5");
+
 
 
         //Identifica o Spinner no layout
@@ -86,7 +112,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity {
         spnTamanho.setAdapter(spinnerArrayAdapter2);
 
         //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList Tamanhos
-        ArrayAdapter<String> arrayAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ongs);
+        ArrayAdapter<String> arrayAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, NomesOng);
         ArrayAdapter<String> spinnerArrayAdapter3 = arrayAdapter3;
         spinnerArrayAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spnOngIndicada.setAdapter(spinnerArrayAdapter3);
