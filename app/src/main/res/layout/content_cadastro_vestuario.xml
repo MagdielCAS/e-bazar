@@ -1,213 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cadastro de vestuario"
-        android:padding="20dp"
-        android:gravity="center"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Título do Anúncio"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Tipo"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <Spinner
-            android:id="@+id/spnTipo"
-            android:layout_width="0dp"
-            android:spinnerMode="dialog"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.syllas.e_bazar.CadastroVestuarioActivity"
+    tools:showIn="@layout/app_bar_cadastro_vestuario">
 
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Tamanho"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <Spinner
-            android:id="@+id/spnTamanho"
-            android:spinnerMode="dialog"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
+        android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Ong indicada"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <Spinner
-            android:id="@+id/spnOng"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dialog"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Cor"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Estado"
-            android:gravity="center"
-          />
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="2">
-
-            <RatingBar
-                android:id="@+id/ratingbarVest"
-                android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Título do Anúncio"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <EditText
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:numStars="5"
-                android:rating="3"
-                android:isIndicator="false"
-                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Tipo"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <Spinner
+                android:id="@+id/spnTipo"
+                android:layout_width="0dp"
+                android:spinnerMode="dialog"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Tamanho"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <Spinner
+                android:id="@+id/spnTamanho"
+                android:spinnerMode="dialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Ong indicada"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <Spinner
+                android:id="@+id/spnOng"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Cor"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Estado"
+                android:gravity="center"
                 />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="2">
+
+                <RatingBar
+                    android:id="@+id/ratingbarVest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:isIndicator="false"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:padding="10dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:clickable="true"
-                android:onClick="abrirGaleria"
-                android:src="@drawable/ic_add_a_photo_black_48dp"
-                android:layout_gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:onClick="abrirGaleria"
+                    android:src="@drawable/ic_add_a_photo_black_48dp"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:onClick="tirarFoto"
+                    android:src="@drawable/ic_camera_alt_black_48dp"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:clickable="true"
-                android:onClick="tirarFoto"
-                android:src="@drawable/ic_camera_alt_black_48dp"
-                android:layout_gravity="center" />
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="top"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/ivFotoTirada1"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+                <ImageView
+                    android:id="@+id/ivFotoTirada2"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+                <ImageView
+                    android:id="@+id/ivFotoTirada3"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:gravity="top"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/ivFotoTirada1"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-            <ImageView
-                android:id="@+id/ivFotoTirada2"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-            <ImageView
-                android:id="@+id/ivFotoTirada3"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-
-        </LinearLayout>
+            android:text="cadastrar" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="cadastrar" />
-
-</LinearLayout>
 </ScrollView>
