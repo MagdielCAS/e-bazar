@@ -75,7 +75,6 @@ public class EbazarDAO {
         vest.setPreco(cursor.getDouble(5));
         vest.setEstadoConservacao(cursor.getFloat(6));
         vest.setOng(cursor.getString(7));
-        vest.setImg(cursor.getString(8));
         return vest;
     }
 

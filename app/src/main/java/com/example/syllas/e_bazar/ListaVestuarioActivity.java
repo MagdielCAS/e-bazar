@@ -76,7 +76,6 @@ public class ListaVestuarioActivity extends AppCompatActivity
             vest.setPreco(i + (i % 2 == 0 ? 0.35 * i : 0.5 * i));
             vest.setEstadoConservacao(i % 5);
             vest.setOng("Ong " + i);
-            vest.setImg("blabla" + i);
             listVest.add(vest); //adiciona item ao vetor
         }
         bazarDAO.InserirBDVestuario(listVest); //adiciona vetor ao banco de dados

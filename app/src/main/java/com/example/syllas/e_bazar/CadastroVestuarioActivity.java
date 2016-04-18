@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -230,22 +231,47 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         ItemVestuario item = new ItemVestuario();
         EditText etNome = (EditText) findViewById(R.id.etTituloVestuario);
         EditText etCor = (EditText) findViewById(R.id.etCorVestuario);
+        EditText etPreco = (EditText) findViewById(R.id.etPrecoVestuario);
         RatingBar rtBar = (RatingBar) findViewById(R.id.ratingbarVest);
         ImageView iv1 = (ImageView) findViewById(R.id.ivFotoTirada1);
         ImageView iv2 = (ImageView) findViewById(R.id.ivFotoTirada2);
         ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
+        ArrayList<Drawable> fotos = new ArrayList<Drawable>();
 
 
         item.setNome(etNome.getText().toString());
-        item.setTipo(tipo);
+        item.setTipo(tipo,pegarIdTipo(tipo));
         item.setTamanho(tamanho);
         item.setOng(ong);
         item.setCor(etCor.getText().toString());
         item.setEstadoConservacao(rtBar.getRating());
-        iv1.getDrawable();
+        fotos.add(iv1.getDrawable());
+        fotos.add(iv2.getDrawable());
+        fotos.add(iv3.getDrawable());
+        item.setPreco(Double.parseDouble(etPreco.getText().toString()));
+        item.setFotos(fotos);
+        item.setCarrinho(false);
 
 
+    }
 
+    public int pegarIdTipo(String tipo){
+        switch (tipo){
+            case "Calça":
+                return 1;
+            case "Calçado":
+                return 2;
+            case "Meia":
+                return 3;
+            case "Blusa":
+                return 4;
+            case "Vestido":
+                return 5;
+            case "Saia":
+                return 6;
+            default:
+                return -1;
+        }
     }
 
 

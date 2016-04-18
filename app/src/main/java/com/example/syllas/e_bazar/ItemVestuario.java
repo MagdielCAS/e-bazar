@@ -23,8 +23,7 @@ public class ItemVestuario{
     private int idTipo;
     private String tipo;
     private String _id;
-    private String img;
-    private ArrayList<Uri> fotos;
+    private ArrayList<Drawable> fotos;
     private boolean carrinho;
 
     public String getTamanho() {
@@ -144,9 +143,6 @@ public class ItemVestuario{
         }
     }
 
-    public void setImg(String Img) {
-        this.img = Img;
-    }
 
 
     public String getNome() {
@@ -157,11 +153,11 @@ public class ItemVestuario{
         this.nome = nome;
     }
 
-    public ArrayList<Uri> getFotos() {
+    public ArrayList<Drawable> getFotos() {
         return fotos;
     }
 
-    public void setFotos(ArrayList<Uri> fotos) {
+    public void setFotos(ArrayList<Drawable> fotos) {
         this.fotos = fotos;
     }
 
