@@ -139,8 +139,8 @@ public class ListaVestuarioActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
         Toast.makeText(this, "Item adicionado ao carrinho(teste)", Toast.LENGTH_SHORT).show();
-      //  bazarDAO.changeValueVestuario(itensVest.get(position).getId(),
-      //          DatabaseHelper.Vestuario.CARRINHO, "TRUE");
+        bazarDAO.changeValueVestuario(itensVest.get(position),
+                DatabaseHelper.Vestuario.CARRINHO, "TRUE");
         itensVest.remove(position);
         adapter.notifyItemRemoved(position);
     }

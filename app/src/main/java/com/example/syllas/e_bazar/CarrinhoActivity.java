@@ -136,7 +136,7 @@ public class CarrinhoActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensCarrinho.get(position);
         Toast.makeText(this, "Item removido(teste)", Toast.LENGTH_SHORT).show();
-        ebazarDAO.changeValueVestuario(itensCarrinho.get(position).getId(),
+        ebazarDAO.changeValueVestuario(itensCarrinho.get(position),
                 DatabaseHelper.Vestuario.CARRINHO, "FALSE");
         itensCarrinho.remove(position);
         adapter.notifyItemRemoved(position);

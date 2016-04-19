@@ -204,32 +204,7 @@ public class ItemVestuario{
                 break;
         }
     }
-    public boolean compareCampo (String campo,String valor){
-        switch (campo){
-            case DatabaseHelper.Vestuario.CARRINHO:
-                return compareCarrinho(valor);
-            case DatabaseHelper.Vestuario.ONG:
-                return compareOng(valor);
-            case DatabaseHelper.Vestuario.PRECO:
-                return comparePreco(valor);
-            case DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO:
-                return compareEstadoConservacao(valor);
-            case DatabaseHelper.Vestuario._ID:
-                return compareId(valor);
-            case DatabaseHelper.Vestuario.COR:
-                return compareCor(valor);
-            case DatabaseHelper.Vestuario.ID_TIPO:
-                return compareIdTipo(valor);
-            case DatabaseHelper.Vestuario.NOME:
-                return compareNome(valor);
-            case DatabaseHelper.Vestuario.TIPO:
-                return compareTipo(valor);
-            case DatabaseHelper.Vestuario.TAMANHO:
-                return compareTamanho(valor);
-            default:
-                return false;
-        }
-    }
+
     public boolean compareNome(String valor){ return (getNome() == valor); }
     public boolean compareTamanho(String valor){ return (getTamanho() == valor); }
     public boolean compareCor(String valor){ return (getCor() == valor); }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,16 +24,37 @@
         android:layout_alignParentStart="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.example.syllas.e_bazar.ListaOngActivity"
-        tools:showIn="@layout/app_bar_carrinho">
+        tools:showIn="@layout/app_bar_carrinho"
+        android:layout_weight="0.93">
 
     </android.support.v7.widget.RecyclerView>
 
-    <Button
-
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text= "Comprar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+        android:layout_height="67dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.13">
+
+        <Button
+            android:id="@+id/comprar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "Comprar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:layout_weight="1.00"
+            android:layout_below="@+id/preco"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço: R$ 12312"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1.00"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>
