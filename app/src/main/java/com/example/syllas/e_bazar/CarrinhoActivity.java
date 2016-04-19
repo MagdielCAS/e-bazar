@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLData;
@@ -31,6 +32,7 @@ public class CarrinhoActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private ItemCarrinhoAdapter adapter;
+    private TextView precoTotal;
 
 
     @Override
@@ -62,6 +64,27 @@ public class CarrinhoActivity extends AppCompatActivity
 
         adapter = new ItemCarrinhoAdapter(this,this,itensCarrinho);
         recyclerView.setAdapter(adapter);
+
+        precoTotal = (TextView) findViewById(R.id.precoTotal);
+        precoTotal.setText("Preço: R$ "+Double.toString(getPrecoTotal(itensCarrinho)));
+    }
+
+    private double getPrecoTotal(List<ItemVestuario> itens){
+        double preco = 0;
+        for (ItemVestuario vest:itens) {
+            preco += vest.getPreco();
+        }
+        return preco;
+    }
+
+    public void comprarOnClick(View view){
+        ItemOng getOng;
+        for(ItemVestuario vest:itensCarrinho){
+            getOng = ebazarDAO.getOng(DatabaseHelper.Ong.NOME,vest.getOng());
+            ebazarDAO.changeValueOng(getOng,DatabaseHelper.Ong.VALOR_ARRECADADO,
+                    String.valueOf(getOng.getValorArrecadado() + vest.getPreco()));
+            ebazarDAO.RemoverBDVestuario(vest.getId());
+        }
 
     }
 
@@ -104,11 +127,16 @@ public class CarrinhoActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cadastroVest) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
 
         } else if (id == R.id.listOng) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, ListaOngActivity.class));
+        } else if (id == R.id.listVest){
+            this.finishAfterTransition();
+            startActivity(new Intent(this, ListaVestuarioActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,7 +164,7 @@ public class CarrinhoActivity extends AppCompatActivity
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensCarrinho.get(position);
         Toast.makeText(this, "Item removido(teste)", Toast.LENGTH_SHORT).show();
-        ebazarDAO.changeValueVestuario(itensCarrinho.get(position).getId(),
+        ebazarDAO.changeValueVestuario(itensCarrinho.get(position),
                 DatabaseHelper.Vestuario.CARRINHO, "FALSE");
         itensCarrinho.remove(position);
         adapter.notifyItemRemoved(position);
