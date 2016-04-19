@@ -76,6 +76,7 @@ public class EbazarDAO {
         vest.setPreco(cursor.getDouble(6));
         vest.setEstadoConservacao(cursor.getFloat(7));
         vest.setOng(cursor.getString(8));
+        vest.setCampo(DatabaseHelper.Vestuario.CARRINHO,cursor.getString(9));
         return vest;
     }
 
@@ -123,7 +124,7 @@ public class EbazarDAO {
     public void RemoverBDVestuario(String id){
         db = getDb();
         String where[] = new String[]{id};
-        db.delete(DatabaseHelper.Vestuario.TABELA,DatabaseHelper.Vestuario._ID + " = ?",where);
+        db.delete(DatabaseHelper.Vestuario.TABELA, DatabaseHelper.Vestuario._ID + " = ?", where);
     }
 
     public void RemoverBDOng(String id){
@@ -132,4 +133,13 @@ public class EbazarDAO {
         db.delete(DatabaseHelper.Ong.TABELA,DatabaseHelper.Ong._ID + " = ?",where);
     }
 
+    public void changeValueVestuario(String ID,String campo, String valor){
+        db = getDb();
+        List<ItemVestuario> lista = new ArrayList<ItemVestuario>();
+        ItemVestuario item = new ItemVestuario();
+        lista = listarVestuario();
+        for (ItemVestuario i:lista) {
+           // if
+        }
+    }
 }
