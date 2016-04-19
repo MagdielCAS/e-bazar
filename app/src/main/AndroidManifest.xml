@@ -36,7 +36,9 @@
             android:name=".CarrinhoActivity"
             android:label="@string/title_activity_carrinho"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CadastroOngActivity"></activity>
+        <activity android:name=".CadastroOngActivity"
+            android:label="@string/title_activity_cadastro_ong"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

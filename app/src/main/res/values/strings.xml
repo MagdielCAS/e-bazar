@@ -11,9 +11,10 @@
 
     <string name="title_activity_lista_ong">ONGs</string>
     <string name="listVest">Listar Vestuário</string>
-    <string name="title_activity_cadastro_vestuario">Cadastro Vestuario</string>
+    <string name="title_activity_cadastro_vestuario">Cadastraar Vestuario</string>
     <string name="carrinho">Carrinho</string>
     <string name="title_activity_carrinho">Carrinho</string>
+    <string name="title_activity_cadastro_ong">Cadastrar Ong</string>
 
     <string-array name="ufs">
         <item/>

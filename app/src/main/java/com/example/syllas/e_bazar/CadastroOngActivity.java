@@ -21,7 +21,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroOngActivity extends AppCompatActivity {
+public class CadastroOngActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
     private List<ItemOng> itemOng;
@@ -30,8 +31,20 @@ public class CadastroOngActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_ong);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
 
 
@@ -58,4 +71,60 @@ public class CadastroOngActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId(); //item do menu
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.cadastroVest) {
+            this.finishAfterTransition();
+            startActivity(new Intent(this, CadastroVestuarioActivity.class));
+        } else if (id == R.id.listVest) {
+            this.finishAfterTransition();
+            startActivity(new Intent(this, ListaVestuarioActivity.class));
+        } else if (id == R.id.listOng) {
+            this.finishAfterTransition();
+            startActivity(new Intent(this, ListaOngActivity.class));
+        } else if (id == R.id.carrinho){
+            this.finishAfterTransition();
+            startActivity(new Intent(this, CarrinhoActivity.class));
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
