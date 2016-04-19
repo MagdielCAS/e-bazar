@@ -123,7 +123,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         if (id == R.id.cadastroVest) {
             startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
-
+            startActivity(new Intent(this, CadastroOngActivity.class));
         } else if (id == R.id.listOng) {
             startActivity(new Intent(this, ListaOngActivity.class));
         } else if (id == R.id.carrinho){

@@ -1,8 +1,11 @@
 package com.example.syllas.e_bazar;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +13,9 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -44,7 +49,6 @@ import java.util.List;
 
 public class CadastroVestuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     int cont = 0;
-    private Uri fileUri;
     private String selectedImagePath;
     
 
@@ -54,9 +58,11 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
     private List<String> NomesOng = new ArrayList<String>();
     private String tipo,tamanho,ong;
 
+
     private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
     private List<ItemOng> itemOng;
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +221,14 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             }
         });
 
+        if(shouldAskPermission()) {
+            String[] perms = {"android.permission. WRITE_EXTERNAL_STORAGE"};
+
+            int permsRequestCode = 200;
+
+            requestPermissions(perms, permsRequestCode);
+        }
+
     }
 
 
@@ -272,7 +286,18 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
     //Abre a camera nativa do smartphone
     public void tirarFoto(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 0);
+
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+            startActivityForResult(intent, 0);
+        }
     }
 
     //Abre a galeria do smartphone
@@ -288,30 +313,26 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {//imagem da camera
             if (resultCode == RESULT_OK) {
-                Bundle bundle = data.getExtras();
-                if (bundle != null) {
-                    Bitmap img = (Bitmap) bundle.get("data");//Pega a imagem.
                     cont += 1;
                     switch (cont) {
                         case 1:
                             ImageView iv1 = (ImageView) findViewById(R.id.ivFotoTirada1);
-                            iv1.setImageBitmap(img);
+                            iv1.setImageDrawable(Drawable.createFromPath(selectedImagePath));
 
                             break;
                         case 2:
                             ImageView iv2 = (ImageView) findViewById(R.id.ivFotoTirada2);
-                            iv2.setImageBitmap(img);
+                            iv2.setImageDrawable(Drawable.createFromPath(selectedImagePath));
                             break;
                         case 3:
                             ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
-                            iv3.setImageBitmap(img);
+                            iv3.setImageDrawable(Drawable.createFromPath(selectedImagePath));
                             break;
                         default:
                             Toast toast = Toast.makeText(getApplicationContext(), "Número máximo de imagens atingito", Toast.LENGTH_SHORT);
                             toast.show();
                             break;
                     }
-                }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getBaseContext(), "A captura foi cancelada", Toast.LENGTH_SHORT).show();
             } else {
@@ -321,35 +342,22 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             if (resultCode==RESULT_OK){
                 //imagem veio da galeria
                 Uri uriImagemGaleria = data.getData();
-
-                //CASO SEJA NECESSÁRIO O PATH (BUGADO)
-                /*String[] projection = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getContentResolver().query(uriImagemGaleria,projection,null,null,null);
-                if( cursor != null ){
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    selectedImagePath = cursor.getString(column_index);
-                    Toast.makeText(getApplicationContext(), "caminho "+column_index, Toast.LENGTH_SHORT).show();
-                }else{
-                    selectedImagePath = uriImagemGaleria.getPath();
-                    Toast.makeText(getApplicationContext(), "Entrou no else "+selectedImagePath, Toast.LENGTH_SHORT).show();
-                }
-
-               Bitmap imgGalery = BitmapFactory.decodeFile(selectedImagePath);*/
+                selectedImagePath = getRealPathFromURI_API19(getApplicationContext(),uriImagemGaleria);
+                Log.i("Caminho da imagem ",selectedImagePath);
 
                 cont += 1;
                 switch (cont) {
                     case 1:
                         ImageView iv1 = (ImageView) findViewById(R.id.ivFotoTirada1);
-                        iv1.setImageURI(uriImagemGaleria);
+                        iv1.setImageDrawable(Drawable.createFromPath(selectedImagePath));
                         break;
                     case 2:
                         ImageView iv2 = (ImageView) findViewById(R.id.ivFotoTirada2);
-                        iv2.setImageURI(uriImagemGaleria);
+                        iv2.setImageDrawable(Drawable.createFromPath(selectedImagePath));
                         break;
                     case 3:
                         ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
-                        iv3.setImageURI(uriImagemGaleria);
+                        iv3.setImageDrawable(Drawable.createFromPath(selectedImagePath));
                         break;
                     default:
                         Toast toast = Toast.makeText(getApplicationContext(), "Número máximo de imagens atingito", Toast.LENGTH_SHORT);
@@ -361,6 +369,30 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         }
     }
 
+    @SuppressLint("NewApi")
+    public static String getRealPathFromURI_API19(Context context, Uri uri){
+        String filePath = "";
+        String wholeID = DocumentsContract.getDocumentId(uri);
+
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+
+        String[] column = { MediaStore.Images.Media.DATA };
+
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, new String[]{ id }, null);
+
+        int columnIndex = cursor.getColumnIndex(column[0]);
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -370,7 +402,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         if (id == R.id.listVest) {
             startActivity(new Intent(this, ListaVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
-
+            startActivity(new Intent(this, CadastroOngActivity.class));
         } else if (id == R.id.listOng) {
             startActivity(new Intent(this, ListaOngActivity.class));
         }
@@ -401,6 +433,45 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults){
+
+        switch(permsRequestCode){
+
+            case 200:
+
+                boolean writeAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+
+                break;
+
+        }
+
+    }
+
+
+
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = new File(storageDir.getPath(), imageFileName + ".png");
+
+        // Save a file: path for use with ACTION_VIEW intents
+        selectedImagePath = image.getAbsolutePath();
+        return image;
+    }
+
+
+
+
+    private boolean shouldAskPermission(){
+
+        return(Build.VERSION.SDK_INT> Build.VERSION_CODES.LOLLIPOP_MR1);
+
     }
 
 
