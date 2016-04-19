@@ -368,11 +368,16 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         int id = item.getItemId();
 
         if (id == R.id.listVest) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, ListaVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
 
         } else if (id == R.id.listOng) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, ListaOngActivity.class));
+        }else if(id == R.id.carrinho){
+            this.finishAfterTransition();
+            startActivity(new Intent(this, CarrinhoActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

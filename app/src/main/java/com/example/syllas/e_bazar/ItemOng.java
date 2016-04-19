@@ -79,4 +79,27 @@ public class ItemOng {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public void setCampo (String campo,String valor) {
+        switch (campo) {
+            case DatabaseHelper.Ong.VALOR_ARRECADADO:
+                setValorArrecadado(Double.parseDouble(valor));
+                break;
+            case DatabaseHelper.Ong.NOME:
+                setNome(valor);
+                break;
+            case DatabaseHelper.Ong.ESTADO:
+                setUF((valor));
+                break;
+            case DatabaseHelper.Ong.CIDADE:
+                setCidade((valor));
+                break;
+            case DatabaseHelper.Ong._ID:
+                setId(valor);
+                break;
+            case DatabaseHelper.Ong.INTUITO:
+                setIntuito(valor);
+                break;
+        }
+    }
 }

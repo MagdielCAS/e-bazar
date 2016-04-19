@@ -29,14 +29,11 @@ public class ItemCarrinhoAdapter extends RecyclerView.Adapter<ItemCarrinhoAdapte
         this.itensVest = itensVest;
     }
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View view = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.cardview_vest_layout, parent, false);
-
         return new ViewHolder(view);
     }
 

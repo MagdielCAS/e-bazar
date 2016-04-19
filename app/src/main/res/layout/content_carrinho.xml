@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
         android:id="@+id/cardList_carrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,17 +24,32 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.syllas.e_bazar.ListaOngActivity"
+        tools:context="com.example.syllas.e_bazar.CarrinhoActivity"
         tools:showIn="@layout/app_bar_carrinho"
-        android:layout_weight="0.93">
+        android:layout_weight="1.00">
 
     </android.support.v7.widget.RecyclerView>
-
-    <RelativeLayout
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.13">
+        android:layout_height="wrap_content"
+        card_view:cardElevation="6dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/precoTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço: R$"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1.00"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/comprar"
@@ -43,18 +59,9 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:layout_weight="1.00"
             android:layout_below="@+id/preco"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:id="@+id/preco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preço: R$ 12312"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1.00"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:onClick="comprarOnClick"
+            tools:context="com.example.syllas.e_bazar.CarrinhoActivity"/>
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -76,7 +76,7 @@ public class EbazarDAO {
         vest.setPreco(cursor.getDouble(6));
         vest.setEstadoConservacao(cursor.getFloat(7));
         vest.setOng(cursor.getString(8));
-        vest.setCampo(DatabaseHelper.Vestuario.CARRINHO,cursor.getString(9));
+        vest.setCampo(DatabaseHelper.Vestuario.CARRINHO, cursor.getString(9));
         return vest;
     }
 
@@ -148,5 +148,36 @@ public class EbazarDAO {
         values.put(DatabaseHelper.Vestuario.ONG,vest.getOng());
         values.put(DatabaseHelper.Vestuario.CARRINHO, String.valueOf(vest.isCarrinho()).toUpperCase());
         db.update(DatabaseHelper.Vestuario.TABELA,values,DatabaseHelper.Vestuario._ID + " = ?",where);
+    }
+
+    public void changeValueOng(ItemOng ong,String campo, String valor){
+        db = getDb();
+        ong.setCampo(campo,valor);
+        ContentValues values = new ContentValues();
+        String[] where = new String[]{ong.getId()};
+        values.put(DatabaseHelper.Ong.NOME, ong.getNome());
+        values.put(DatabaseHelper.Ong.INTUITO,ong.getIntuito());
+        values.put(DatabaseHelper.Ong.CIDADE,ong.getCidade());
+        values.put(DatabaseHelper.Ong.ESTADO, ong.getUF());
+        values.put(DatabaseHelper.Ong.VALOR_ARRECADADO,ong.getValorArrecadado());
+        db.update(DatabaseHelper.Ong.TABELA,values,DatabaseHelper.Ong._ID + " = ?",where);
+    }
+    public ItemOng getOng(String campo,String value){
+        db = getDb();
+        String [] where = new String[]{value};
+        Cursor cursor = db.query(DatabaseHelper.Ong.TABELA,
+                DatabaseHelper.Ong.COLUNAS,
+                campo + "= ?", where, null, null,null);
+        ItemOng ong = new ItemOng();
+        while(cursor.moveToNext()){
+            ong.setId(cursor.getString(0));
+            ong.setNome(cursor.getString(1));
+            ong.setIntuito(cursor.getString(2));
+            ong.setCidade(cursor.getString(3));
+            ong.setUF(cursor.getString(4));
+            ong.setValorArrecadado(Double.parseDouble(cursor.getString(5)));
+        }
+        cursor.close();
+        return ong;
     }
 }

@@ -42,7 +42,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
         //criarVestFake(); //exemplo de injeção de dados no bd (olhar metodo)
-        itensVest = listVestuario(bazarDAO.listarVestuario()); //array com os itens a serem exibidos
+        itensVest = bazarDAO.listarVestuario(); //array com os itens a serem exibidos
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -121,12 +121,15 @@ public class ListaVestuarioActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cadastroVest) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
 
         } else if (id == R.id.listOng) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, ListaOngActivity.class));
         } else if (id == R.id.carrinho){
+            this.finishAfterTransition();
             startActivity(new Intent(this, CarrinhoActivity.class));
         }
 
@@ -138,11 +141,13 @@ public class ListaVestuarioActivity extends AppCompatActivity
     @Override
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
-        Toast.makeText(this, "Item adicionado ao carrinho(teste)", Toast.LENGTH_SHORT).show();
-        bazarDAO.changeValueVestuario(itensVest.get(position),
-                DatabaseHelper.Vestuario.CARRINHO, "TRUE");
-        itensVest.remove(position);
-        adapter.notifyItemRemoved(position);
+        if(!selectedItem.isCarrinho()) {
+            Toast.makeText(this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+            bazarDAO.changeValueVestuario(itensVest.get(position),
+                    DatabaseHelper.Vestuario.CARRINHO, "TRUE");
+        }else{
+            Toast.makeText(this, "Item já está no carrinho", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -151,14 +156,5 @@ public class ListaVestuarioActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    private List<ItemVestuario> listVestuario(List<ItemVestuario> itensVest){
-        List<ItemVestuario> lista = new ArrayList<ItemVestuario>();
-        for (ItemVestuario vest:itensVest){
-            if(!vest.isCarrinho()){
-                lista.add(vest);
-            }
-        }
-        return lista;
-    }
 
 }

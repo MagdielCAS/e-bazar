@@ -35,7 +35,7 @@ public class ListaOngActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         ebazarDAO = new EbazarDAO(this);
-        criarOngFake();
+        //criarOngFake();
         itensOng = ebazarDAO.listarOng();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,11 +98,16 @@ public class ListaOngActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cadastroVest) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
 
         } else if (id == R.id.listVest) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, ListaVestuarioActivity.class));
+        } else if (id == R.id.carrinho){
+            this.finishAfterTransition();
+            startActivity(new Intent(this, CarrinhoActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
