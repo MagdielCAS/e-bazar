@@ -85,7 +85,9 @@ public class CarrinhoActivity extends AppCompatActivity
                     String.valueOf(getOng.getValorArrecadado() + vest.getPreco()));
             ebazarDAO.RemoverBDVestuario(vest.getId());
         }
-
+        Toast.makeText(this, "Compra realizada com sucesso", Toast.LENGTH_SHORT).show();
+        this.finishAfterTransition();
+        startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     @Override
