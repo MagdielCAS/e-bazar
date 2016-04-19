@@ -81,33 +81,6 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
 
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
-        //cria dados fakes (Apagar depois)
-        itemOng = new ArrayList<ItemOng>();
-        for(int i = 0; i<10;i++){
-            ItemOng ong = new ItemOng(); //item do vetor
-            //adiciona informações
-            ong.setCidade("Bla bla");
-            ong.setId(""+i+"");
-            ong.setImg("");
-            ong.setIntuito("");
-            ong.setNome("Ong "+i+" :)");
-            ong.setUF("");
-            itemOng.add(ong); //adiciona item ao vetor
-        }
-
-
-        bazarDAO.InserirBDOng(itemOng);
-
-        itemOng.clear();
-        NomesOng.clear();
-
-        itemOng = bazarDAO.listarOng();
-        for (int i = 0; i<itemOng.size(); i++ ){
-            NomesOng.add(itemOng.get(i).getNome());
-        }
-
-
-
         //Adicionando Nomes no ArrayList
         tipos.add("Blusa");
         tipos.add("Calça");

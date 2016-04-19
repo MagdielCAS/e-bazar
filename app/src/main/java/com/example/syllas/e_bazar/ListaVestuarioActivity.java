@@ -60,6 +60,11 @@ public class ListaVestuarioActivity extends AppCompatActivity
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); //define como uma lista vertical
 
         recyclerView.setLayoutManager(linearLayoutManager); //configurando o recycler view com a especificação de layout
+        if(itensVest.size()==0){
+            recyclerView.setBackgroundResource(R.drawable.inicial);
+        }else{
+            recyclerView.setBackgroundColor(getColor(R.color.cardview_light_background));
+        }
 
         adapter = new ItemVestuarioAdapter(this,this,itensVest);
         recyclerView.setAdapter(adapter);
