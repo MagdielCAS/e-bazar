@@ -1,20 +1,37 @@
 package com.example.syllas.e_bazar;
 
+import android.content.ClipData;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-public class CarrinhoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import java.sql.SQLData;
+import java.sql.SQLInput;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CarrinhoActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, ItemCarrinhoAdapter.OnDataSelected{
 
 
     private EbazarDAO ebazarDAO;
+    private List<ItemVestuario> itensCarrinho = new ArrayList<ItemVestuario>();
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private ItemCarrinhoAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +50,19 @@ public class CarrinhoActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         ebazarDAO = new EbazarDAO(this);
+        itensCarrinho = listCarrinhos(ebazarDAO.listarVestuario());
+
+        recyclerView = (RecyclerView) findViewById(R.id.cardList_carrinho); //pega o id do layout para alocar os cardview dinamicamente
+        recyclerView.setHasFixedSize(true); //Seta os elementos de tamanho fixo, ajudar a ganhar desempenho
+
+        linearLayoutManager = new LinearLayoutManager(this); //Define como os dados são apresentados no recycler view
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL); //define como uma lista vertical
+
+        recyclerView.setLayoutManager(linearLayoutManager); //configurando o recycler view com a especificação de layout
+
+        adapter = new ItemCarrinhoAdapter(this,this,itensCarrinho);
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -92,4 +122,23 @@ public class CarrinhoActivity extends AppCompatActivity implements NavigationVie
         super.onDestroy();
     }
 
+    private List<ItemVestuario> listCarrinhos(List<ItemVestuario> itensVest){
+        List<ItemVestuario> carrinho = new ArrayList<ItemVestuario>();
+        for (ItemVestuario vest:itensVest){
+            if(vest.isCarrinho()){
+                carrinho.add(vest);
+            }
+        }
+        return carrinho;
+    }
+
+    @Override
+    public void onDataSelected(View view, int position) {
+        ItemVestuario selectedItem  = itensCarrinho.get(position);
+        Toast.makeText(this, "Item removido(teste)", Toast.LENGTH_SHORT).show();
+        ebazarDAO.changeValueVestuario(itensCarrinho.get(position).getId(),
+                DatabaseHelper.Vestuario.CARRINHO, "FALSE");
+        itensCarrinho.remove(position);
+        adapter.notifyItemRemoved(position);
+    }
 }

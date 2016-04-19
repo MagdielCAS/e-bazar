@@ -1,5 +1,6 @@
 package com.example.syllas.e_bazar;
 
+import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -41,7 +42,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
         //criarVestFake(); //exemplo de injeção de dados no bd (olhar metodo)
-        itensVest = bazarDAO.listarVestuario(); //array com os itens a serem exibidos
+        itensVest = listVestuario(bazarDAO.listarVestuario()); //array com os itens a serem exibidos
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -125,6 +126,8 @@ public class ListaVestuarioActivity extends AppCompatActivity
 
         } else if (id == R.id.listOng) {
             startActivity(new Intent(this, ListaOngActivity.class));
+        } else if (id == R.id.carrinho){
+            startActivity(new Intent(this, CarrinhoActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,8 +138,9 @@ public class ListaVestuarioActivity extends AppCompatActivity
     @Override
     public void onDataSelected(View view, int position) {
         ItemVestuario selectedItem  = itensVest.get(position);
-        Toast.makeText(this, "Item comprado(teste)", Toast.LENGTH_SHORT).show();
-        bazarDAO.RemoverBDVestuario(itensVest.get(position).getId());
+        Toast.makeText(this, "Item adicionado ao carrinho(teste)", Toast.LENGTH_SHORT).show();
+      //  bazarDAO.changeValueVestuario(itensVest.get(position).getId(),
+      //          DatabaseHelper.Vestuario.CARRINHO, "TRUE");
         itensVest.remove(position);
         adapter.notifyItemRemoved(position);
     }
@@ -145,6 +149,16 @@ public class ListaVestuarioActivity extends AppCompatActivity
     protected void onDestroy() {
         bazarDAO.close();
         super.onDestroy();
+    }
+
+    private List<ItemVestuario> listVestuario(List<ItemVestuario> itensVest){
+        List<ItemVestuario> lista = new ArrayList<ItemVestuario>();
+        for (ItemVestuario vest:itensVest){
+            if(!vest.isCarrinho()){
+                lista.add(vest);
+            }
+        }
+        return lista;
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 
@@ -168,4 +169,75 @@ public class ItemVestuario{
     public void setCarrinho(boolean carrinho) {
         this.carrinho = carrinho;
     }
+
+    public void setCampo (String campo,String valor) {
+        switch (campo) {
+            case DatabaseHelper.Vestuario.CARRINHO:
+                setCarrinho(Boolean.parseBoolean(valor));
+                break;
+            case DatabaseHelper.Vestuario.ONG:
+                setOng(valor);
+                break;
+            case DatabaseHelper.Vestuario.PRECO:
+                setPreco(Double.parseDouble(valor));
+                break;
+            case DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO:
+                setEstadoConservacao(Float.parseFloat(valor));
+                break;
+            case DatabaseHelper.Vestuario._ID:
+                setId(valor);
+                break;
+            case DatabaseHelper.Vestuario.COR:
+                setCor(valor);
+                break;
+            case DatabaseHelper.Vestuario.ID_TIPO:
+                setIdTipo(Integer.parseInt(valor));
+                break;
+            case DatabaseHelper.Vestuario.NOME:
+                setNome((valor));
+                break;
+            case DatabaseHelper.Vestuario.TIPO:
+                setTipo((valor));
+                break;
+            case DatabaseHelper.Vestuario.TAMANHO:
+                setTamanho((valor));
+                break;
+        }
+    }
+    public boolean compareCampo (String campo,String valor){
+        switch (campo){
+            case DatabaseHelper.Vestuario.CARRINHO:
+                return compareCarrinho(valor);
+            case DatabaseHelper.Vestuario.ONG:
+                return compareOng(valor);
+            case DatabaseHelper.Vestuario.PRECO:
+                return comparePreco(valor);
+            case DatabaseHelper.Vestuario.ESTADO_DE_CONSERVACAO:
+                return compareEstadoConservacao(valor);
+            case DatabaseHelper.Vestuario._ID:
+                return compareId(valor);
+            case DatabaseHelper.Vestuario.COR:
+                return compareCor(valor);
+            case DatabaseHelper.Vestuario.ID_TIPO:
+                return compareIdTipo(valor);
+            case DatabaseHelper.Vestuario.NOME:
+                return compareNome(valor);
+            case DatabaseHelper.Vestuario.TIPO:
+                return compareTipo(valor);
+            case DatabaseHelper.Vestuario.TAMANHO:
+                return compareTamanho(valor);
+            default:
+                return false;
+        }
+    }
+    public boolean compareNome(String valor){ return (getNome() == valor); }
+    public boolean compareTamanho(String valor){ return (getTamanho() == valor); }
+    public boolean compareCor(String valor){ return (getCor() == valor); }
+    public boolean compareEstadoConservacao(String valor){ return (String.valueOf(getEstadoConservacao()) == valor); }
+    public boolean comparePreco(String valor){ return (String.valueOf(getPreco()) == valor); }
+    public boolean compareOng(String valor){ return (getOng() == valor); }
+    public boolean compareIdTipo(String valor){ return (String.valueOf(getIdTipo()) == valor); }
+    public boolean compareTipo(String valor){ return (getTipo() == valor); }
+    public boolean compareId(String valor){ return (getId() == valor); }
+    public boolean compareCarrinho(String valor){ return (String.valueOf(isCarrinho()).toUpperCase() == valor.toUpperCase()); }
 }
