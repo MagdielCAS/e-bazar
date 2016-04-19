@@ -129,6 +129,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
             this.finishAfterTransition();
             startActivity(new Intent(this, CadastroVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, CadastroOngActivity.class));
         } else if (id == R.id.listOng) {
             this.finishAfterTransition();

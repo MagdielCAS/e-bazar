@@ -81,6 +81,20 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
 
         bazarDAO = new EbazarDAO(this); //passando o contexto para o bd
 
+        NomesOng.clear();
+
+        itemOng = bazarDAO.listarOng();
+
+        if(itemOng.size()==0){
+            Toast.makeText(this, "Nenhuma ONG cadastrada!", Toast.LENGTH_LONG).show();
+            this.finishAfterTransition();
+            startActivity(new Intent(this,ListaVestuarioActivity.class));
+        }
+
+        for (int i = 0; i<itemOng.size(); i++ ){
+            NomesOng.add(itemOng.get(i).getNome());
+        }
+
         //Adicionando Nomes no ArrayList
         tipos.add("Blusa");
         tipos.add("Calça");
