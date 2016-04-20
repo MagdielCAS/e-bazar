@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +35,8 @@ public class CadastroOngActivity extends AppCompatActivity
 
     private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
     private List<ItemOng> itemOng;
+    private List<String> ufs = new ArrayList<String>();
+    private String uf;
 
     private String selectedImagePath = "";
 
@@ -57,6 +60,57 @@ public class CadastroOngActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ufs.add("AC");
+        ufs.add("AL");
+        ufs.add("AM");
+        ufs.add("AP");
+        ufs.add("BA");
+        ufs.add("CE");
+        ufs.add("DF");
+        ufs.add("ES");
+        ufs.add("GO");
+        ufs.add("MA");
+        ufs.add("MG");
+        ufs.add("MS");
+        ufs.add("MT");
+        ufs.add("PA");
+        ufs.add("PB");
+        ufs.add("PE");
+        ufs.add("PI");
+        ufs.add("PR");
+        ufs.add("RJ");
+        ufs.add("RN");
+        ufs.add("RO");
+        ufs.add("RR");
+        ufs.add("RS");
+        ufs.add("SC");
+        ufs.add("SE");
+        ufs.add("SP");
+        ufs.add("TO");
+
+
+        Spinner spnUFOng = (Spinner) findViewById(R.id.spnUFOng);
+        //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList tipos
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ufs);
+        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnUFOng.setAdapter(spinnerArrayAdapter);
+
+        //Método do Spinner para capturar o item selecionado
+        spnUFOng.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
+                //pega nome pela posição
+                uf = parent.getItemAtPosition(posicao).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
     }
 
@@ -124,7 +178,7 @@ public class CadastroOngActivity extends AppCompatActivity
             item.setNome(etNome.getText().toString());
             item.setIntuito(etIntuito.getText().toString());
             item.setCidade(etCidade.getText().toString());
-            item.setUF("CE");
+            item.setUF(uf);
             item.setImg(selectedImagePath);
             item.setValorArrecadado(0);
 
