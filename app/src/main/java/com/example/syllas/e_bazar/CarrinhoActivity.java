@@ -78,16 +78,20 @@ public class CarrinhoActivity extends AppCompatActivity
     }
 
     public void comprarOnClick(View view){
-        ItemOng getOng;
-        for(ItemVestuario vest:itensCarrinho){
-            getOng = ebazarDAO.getOng(DatabaseHelper.Ong.NOME,vest.getOng());
-            ebazarDAO.changeValueOng(getOng,DatabaseHelper.Ong.VALOR_ARRECADADO,
-                    String.valueOf(getOng.getValorArrecadado() + vest.getPreco()));
-            ebazarDAO.RemoverBDVestuario(vest.getId());
+        if(itensCarrinho.size()!=0) {
+            ItemOng getOng;
+            for (ItemVestuario vest : itensCarrinho) {
+                getOng = ebazarDAO.getOng(DatabaseHelper.Ong.NOME, vest.getOng());
+                ebazarDAO.changeValueOng(getOng, DatabaseHelper.Ong.VALOR_ARRECADADO,
+                        String.valueOf(getOng.getValorArrecadado() + vest.getPreco()));
+                ebazarDAO.RemoverBDVestuario(vest.getId());
+            }
+            Toast.makeText(this, "Compra realizada com sucesso", Toast.LENGTH_SHORT).show();
+            this.finishAfterTransition();
+            startActivity(new Intent(this, CarrinhoActivity.class));
+        }else{
+            Toast.makeText(this, "Carrinho vazio", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Compra realizada com sucesso", Toast.LENGTH_SHORT).show();
-        this.finishAfterTransition();
-        startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     @Override
