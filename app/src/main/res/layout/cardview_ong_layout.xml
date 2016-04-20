@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/imagemOng"
+            android:scaleType="centerCrop"
             android:foregroundGravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
