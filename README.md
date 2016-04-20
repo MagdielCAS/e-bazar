@@ -1,6 +1,6 @@
 # README #
 
-Projeto desenvolvido na disciplina Tópicos Especiais em Computação, ministrada pelo Prof. Dr. Iális Calvalcante.
+Projeto desenvolvido na disciplina Tópicos Especiais em Computação I, ministrada pelo Prof. Dr. Iális Calvalcante.
 
 ### Desenvolvedores ###
 
