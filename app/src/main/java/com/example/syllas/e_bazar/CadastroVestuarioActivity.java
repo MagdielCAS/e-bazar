@@ -106,7 +106,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         tipos.add("Outro");
 
 
-        tamanhos.add("Selecione tipo");
+        tamanhos.add("-");
 
 
 
@@ -172,7 +172,6 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
                     tamanhos.add("Outro");
 
                 }
-
 
             }
 
