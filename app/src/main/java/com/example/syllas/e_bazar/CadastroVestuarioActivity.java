@@ -48,7 +48,7 @@ import java.util.Date;
 import java.util.List;
 
 public class CadastroVestuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    int cont = 0;
+    private int cont = 0;
     private String selectedImagePath;
     
 

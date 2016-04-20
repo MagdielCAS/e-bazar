@@ -1,7 +1,13 @@
 package com.example.syllas.e_bazar;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +34,11 @@ public class CadastroOngActivity extends AppCompatActivity
 
     private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
     private List<ItemOng> itemOng;
+
+    private String selectedImagePath = "";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +60,55 @@ public class CadastroOngActivity extends AppCompatActivity
 
     }
 
+    //Abre a galeria do smartphone
+    public void abrirGaleria(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), 1234);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1234) {//imagem da camera
+            if (resultCode == RESULT_OK) {
+
+                //imagem veio da galeria
+                Uri uriImagemGaleria = data.getData();
+                selectedImagePath = getRealPathFromURI_API19(getApplicationContext(), uriImagemGaleria);
+                Log.i("Caminho da imagem ", selectedImagePath);
+
+                ImageView iv1 = (ImageView) findViewById(R.id.ivLogoOng);
+                iv1.setImageDrawable(Drawable.createFromPath(selectedImagePath));
+            }
+        }
+    }
+
+    @SuppressLint("NewApi")
+    public static String getRealPathFromURI_API19(Context context, Uri uri){
+        String filePath = "";
+        String wholeID = DocumentsContract.getDocumentId(uri);
+
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+
+        String[] column = { MediaStore.Images.Media.DATA };
+
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, new String[]{ id }, null);
+
+        int columnIndex = cursor.getColumnIndex(column[0]);
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
+    }
 
 
     //Cadastra uma ong
@@ -62,7 +123,7 @@ public class CadastroOngActivity extends AppCompatActivity
         item.setIntuito(etIntuito.getText().toString());
         item.setCidade(etCidade.getText().toString());
         item.setUF("CE");
-        item.setImg("");
+        item.setImg(selectedImagePath);
         item.setValorArrecadado(0);
 
         bazarDAO.InserirBDOng(item);
