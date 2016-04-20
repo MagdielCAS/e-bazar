@@ -1,6 +1,7 @@
 package com.example.syllas.e_bazar;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,11 @@ public class ItemOngAdapter extends RecyclerView.Adapter<ItemOngAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemOng item = itensOng.get(position);
-        holder.vImg.setImageResource(R.drawable.ong_img_teste);
+        if(item.getImg()==""){
+            holder.vImg.setImageResource(R.drawable.ong_img_teste);
+        }else{
+            holder.vImg.setImageDrawable(Drawable.createFromPath(item.getImg()));
+        }
         holder.vNome.setText(item.getNome());
         holder.vCidade.setText(item.getCidade());
         holder.vEstado.setText(item.getUF());
