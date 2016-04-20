@@ -2,8 +2,10 @@ package com.example.syllas.e_bazar;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -418,6 +420,18 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            AlertDialog alertDialogBuilder = new AlertDialog.Builder(this).create();
+            alertDialogBuilder.setMessage("Aplicativo desenvolvido por:\nMagdiel Campelo\nSyllas Rangel\nEloise Carvalho\n\n" +
+                    "Futuras implementações:\n- Adicionar tile de informações sobre peça de roupa com fotos." +
+                    "\n- Mais informações sobre ong" +
+                    "\n- Orndenar listas com filtros\n");
+            alertDialogBuilder.setButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialogBuilder.show();
             return true;
         }
 
