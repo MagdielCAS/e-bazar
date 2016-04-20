@@ -42,8 +42,8 @@ public class ItemOngAdapter extends RecyclerView.Adapter<ItemOngAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemOng item = itensOng.get(position);
-        if(item.getImg()==""){
-            holder.vImg.setImageResource(R.drawable.ong_img_teste);
+        if(item.getImg().equals("")){
+            holder.vImg.setImageResource(R.drawable.add_logo);
         }else{
             holder.vImg.setImageDrawable(Drawable.createFromPath(item.getImg()));
         }
