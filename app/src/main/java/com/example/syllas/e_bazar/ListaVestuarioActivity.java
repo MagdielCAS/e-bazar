@@ -1,10 +1,13 @@
 package com.example.syllas.e_bazar;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +35,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
     private EbazarDAO bazarDAO; //Objeto que faz as operações no banco de dados
 
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,7 @@ public class ListaVestuarioActivity extends AppCompatActivity
         if(itensVest.size()==0){
             recyclerView.setBackgroundResource(R.drawable.inicial);
         }else{
-            recyclerView.setBackgroundColor(getColor(R.color.cardview_light_background));
+            recyclerView.setBackgroundColor(Color.WHITE);
         }
 
         adapter = new ItemVestuarioAdapter(this,this,itensVest);
