@@ -115,6 +115,7 @@
                     android:clickable="true"
                     android:onClick="abrirGaleria"
                     android:src="@drawable/add_logo"
+                    android:scaleType="centerCrop"
                     android:padding="10dp"/>
 
             </LinearLayout>
