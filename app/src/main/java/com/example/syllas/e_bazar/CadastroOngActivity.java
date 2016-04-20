@@ -118,17 +118,22 @@ public class CadastroOngActivity extends AppCompatActivity
         EditText etIntuito = (EditText) findViewById(R.id.etIntuitoOng);
         EditText etCidade = (EditText) findViewById(R.id.etCidadeOng);
 
+        if(!etNome.getText().toString().equals("") && !etCidade.getText().toString().equals("")
+                && !etIntuito.getText().toString().equals("")) {
 
-        item.setNome(etNome.getText().toString());
-        item.setIntuito(etIntuito.getText().toString());
-        item.setCidade(etCidade.getText().toString());
-        item.setUF("CE");
-        item.setImg(selectedImagePath);
-        item.setValorArrecadado(0);
+            item.setNome(etNome.getText().toString());
+            item.setIntuito(etIntuito.getText().toString());
+            item.setCidade(etCidade.getText().toString());
+            item.setUF("CE");
+            item.setImg(selectedImagePath);
+            item.setValorArrecadado(0);
 
-        bazarDAO.InserirBDOng(item);
+            bazarDAO.InserirBDOng(item);
 
-        startActivity(new Intent(this, ListaOngActivity.class));
+            startActivity(new Intent(this, ListaOngActivity.class));
+        }else{
+            Toast.makeText(this, "Preencha todos os campo",Toast.LENGTH_SHORT).show();
+        }
     }
 
 

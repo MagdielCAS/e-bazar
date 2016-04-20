@@ -231,23 +231,27 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
         ImageView iv3 = (ImageView) findViewById(R.id.ivFotoTirada3);
         ArrayList<Drawable> fotos = new ArrayList<Drawable>();
 
+        if (!etNome.getText().toString().equals("") && !etCor.getText().toString().equals("")
+                && !etPreco.getText().toString().equals("")) {
+            item.setNome(etNome.getText().toString());
+            item.setTipo(tipo, pegarIdTipo(tipo));
+            item.setTamanho(tamanho);
+            item.setOng(ong);
+            item.setCor(etCor.getText().toString());
+            item.setEstadoConservacao(rtBar.getRating());
+            fotos.add(iv1.getDrawable());
+            fotos.add(iv2.getDrawable());
+            fotos.add(iv3.getDrawable());
+            item.setPreco(Double.parseDouble(etPreco.getText().toString()));
+            item.setFotos(fotos);
+            item.setCarrinho(false);
 
-        item.setNome(etNome.getText().toString());
-        item.setTipo(tipo,pegarIdTipo(tipo));
-        item.setTamanho(tamanho);
-        item.setOng(ong);
-        item.setCor(etCor.getText().toString());
-        item.setEstadoConservacao(rtBar.getRating());
-        fotos.add(iv1.getDrawable());
-        fotos.add(iv2.getDrawable());
-        fotos.add(iv3.getDrawable());
-        item.setPreco(Double.parseDouble(etPreco.getText().toString()));
-        item.setFotos(fotos);
-        item.setCarrinho(false);
+            bazarDAO.InserirBDVestuario(item);
 
-        bazarDAO.InserirBDVestuario(item);
-
-        startActivity(new Intent(this, ListaVestuarioActivity.class));
+            startActivity(new Intent(this, ListaVestuarioActivity.class));
+        }else{
+            Toast.makeText(this, "Preencha todos os campo",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public int pegarIdTipo(String tipo){
