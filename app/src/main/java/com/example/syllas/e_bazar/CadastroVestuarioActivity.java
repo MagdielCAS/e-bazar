@@ -87,8 +87,9 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
 
         if(itemOng.size()==0){
             Toast.makeText(this, "Nenhuma ONG cadastrada!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Por favor, cadastre uma antes de adicionar uma peça", Toast.LENGTH_LONG).show();
             this.finishAfterTransition();
-            startActivity(new Intent(this,ListaVestuarioActivity.class));
+            startActivity(new Intent(this,CadastroOngActivity.class));
         }
 
         for (int i = 0; i<itemOng.size(); i++ ){
@@ -394,6 +395,7 @@ public class CadastroVestuarioActivity extends AppCompatActivity implements Navi
             this.finishAfterTransition();
             startActivity(new Intent(this, ListaVestuarioActivity.class));
         } else if (id == R.id.cadastroOng) {
+            this.finishAfterTransition();
             startActivity(new Intent(this, CadastroOngActivity.class));
         } else if (id == R.id.listOng) {
             this.finishAfterTransition();
