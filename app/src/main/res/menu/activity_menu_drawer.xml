@@ -4,29 +4,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/cadastroVest"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_add_box_black_24dp"
             android:title="@string/novoVest" />
         <item
             android:id="@+id/cadastroOng"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_add_box_black_24dp"
             android:title="@string/novaOng" />
     </group>
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/listVest"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_dvr_black_24dp"
             android:title="@string/listVest" />
         <item
             android:id="@+id/listOng"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_dvr_black_24dp"
             android:title="@string/listOng" />
     </group>
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/carrinho"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="@string/carrinho" />
     </group>
 </menu>
